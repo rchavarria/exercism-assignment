@@ -1,8 +1,3 @@
-//
-// This is only a SKELETON file for the "Bob" exercise. It's been provided as a
-// convenience to get you started writing code faster.
-//
-
 function endsWith(string, ending) {
     var strRegExp = ending + '$';
     return string.match(new RegExp(strRegExp));
