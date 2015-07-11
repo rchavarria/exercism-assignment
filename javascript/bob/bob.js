@@ -27,16 +27,16 @@ Bob.prototype.hey = function(input) {
         return 'Whoa, chill out!';
     }
 
-    if (endsWith(input, '!')) {
-        if (containsLowercase(input)) {
-            return 'Whatever.';
-        }
-
-        return 'Whoa, chill out!';
-    }
-
     if (endsWith(input, '\\?')) {
         return 'Sure.';
+    }
+
+    if (containsLowercase(input)) {
+        return 'Whatever.';
+    }
+
+    if (endsWith(input, '!')) {
+        return 'Whoa, chill out!';
     }
 
     return 'Whatever.';
