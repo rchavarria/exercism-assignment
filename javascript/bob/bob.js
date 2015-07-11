@@ -27,6 +27,10 @@ Bob.prototype.hey = function(input) {
         return 'Fine. Be that way!';
     }
 
+    if (onlyContainsUppercase(input)) {
+        return 'Whoa, chill out!';
+    }
+
     if (endsWith(input, '!')) {
         if (containsLowercase(input)) {
             return 'Whatever.';
@@ -43,9 +47,6 @@ Bob.prototype.hey = function(input) {
         return 'Sure.';
     }
 
-    if (onlyContainsUppercase(input)) {
-        return 'Whoa, chill out!';
-    }
     return 'Whatever.';
 };
 
