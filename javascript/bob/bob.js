@@ -16,10 +16,6 @@ function onlyContainsUppercase(string) {
     return string.match(/^[A-Z\s\?]+$/);
 }
 
-function containsNumbers(string) {
-    return string.match(/[0-9]/);
-}
-
 var Bob = function() {};
 
 Bob.prototype.hey = function(input) {
@@ -40,10 +36,6 @@ Bob.prototype.hey = function(input) {
     }
 
     if (endsWith(input, '\\?')) {
-        // if (!containsLowercase(input) && !containsNumbers(input)) {
-        //     return 'Whoa, chill out!';
-        // }
-
         return 'Sure.';
     }
 
