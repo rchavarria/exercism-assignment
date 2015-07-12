@@ -20,18 +20,18 @@
 
     var Bob = function() {};
 
-    Bob.prototype.hey = function(input) {
-        input = input.trim();
+    Bob.prototype.hey = function(saying) {
+        saying = saying.trim();
 
-        if (isSayingNothing(input)) {
+        if (isSayingNothing(saying)) {
             return RESPONSES.silence;
         }
 
-        if (isShouting(input)) {
+        if (isShouting(saying)) {
             return RESPONSES.shouting;
         }
 
-        if (isAsking(input)) {
+        if (isAsking(saying)) {
             return RESPONSES.asking;
         }
 
