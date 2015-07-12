@@ -1,4 +1,11 @@
 (function () {
+    var RESPONSES = {
+        silence: 'Fine. Be that way!',
+        shouting: 'Whoa, chill out!',
+        asking: 'Sure.',
+        other: 'Whatever.'
+    };
+
     function isShouting(saying) {
         return saying === saying.toUpperCase() && saying.match(/[a-zA-Z]/);
     }
@@ -17,18 +24,18 @@
         input = input.trim();
 
         if (isSayingNothing(input)) {
-            return 'Fine. Be that way!';
+            return RESPONSES.silence;
         }
 
         if (isShouting(input)) {
-            return 'Whoa, chill out!';
+            return RESPONSES.shouting;
         }
 
         if (isAsking(input)) {
-            return 'Sure.';
+            return RESPONSES.asking;
         }
 
-        return 'Whatever.';
+        return RESPONSES.other;
     };
 
     module.exports = Bob;
