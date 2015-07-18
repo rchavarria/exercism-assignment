@@ -1,13 +1,10 @@
 function words(phrase) {
-  var candidates = phrase.split(' '),
-    result = {};
+  var result = {},
+    candidates = phrase.split(' ');
 
-  candidates.forEach(function (i) {
-    if (result[i]) {
-      result[i] += 1;
-    } else {
-      result[i] = 1;
-    }
+  candidates.forEach(function (word) {
+    var count = result[word] || 0;
+    result[word] = (count + 1);
   });
 
   return result;
