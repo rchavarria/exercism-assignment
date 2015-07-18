@@ -1,6 +1,6 @@
 function words(phrase) {
   var result = {},
-    candidates = phrase.replace('\n', ' ').split(' ');
+    candidates = phrase.replace('\n', ' ').replace('\t', ' ').split(' ');
 
   candidates.forEach(function (word) {
     var count = result[word] || 0;
