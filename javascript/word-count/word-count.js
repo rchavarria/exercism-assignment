@@ -1,6 +1,11 @@
+function replaceToSpace(phrase) {
+  return phrase.replace('\n', ' ')
+               .replace('\t', ' ');
+}
+
 function words(phrase) {
   var result = {},
-    candidates = phrase.replace('\n', ' ').replace('\t', ' ').split(' ');
+    candidates = replaceToSpace(phrase).split(' ');
 
   candidates.forEach(function (word) {
     var count = result[word] || 0;
