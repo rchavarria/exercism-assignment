@@ -1,6 +1,7 @@
 function replaceToSpace(phrase) {
   return phrase.replace('\n', ' ')
-               .replace('\t', ' ');
+               .replace('\t', ' ')
+               .replace(/\s+/g, ' ');
 }
 
 function words(phrase) {
