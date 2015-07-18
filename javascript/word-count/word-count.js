@@ -1,5 +1,12 @@
 function words(phrase) {
-  return { word: 1 };
+  var candidates = phrase.split(' '),
+    result = {};
+
+  candidates.forEach(function (i) {
+    result[i] = 1;
+  });
+
+  return result;
 }
 
 module.exports = words;
