@@ -3,7 +3,11 @@ function words(phrase) {
     result = {};
 
   candidates.forEach(function (i) {
-    result[i] = 1;
+    if (result[i]) {
+      result[i] += 1;
+    } else {
+      result[i] = 1;
+    }
   });
 
   return result;
