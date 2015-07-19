@@ -1,8 +1,5 @@
 function replaceToSpace(phrase) {
-  return phrase.replace('\n', ' ')
-               .replace('\t', ' ')
-               .replace(/\s+/g, ' ')
-               .trim();
+  return phrase.replace(/[\t\n\s]+/, ' ').trim();
 }
 
 function isCountedWord(candidate) {
