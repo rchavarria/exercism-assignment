@@ -10,8 +10,11 @@ function words(phrase) {
     candidates = replaceToSpace(phrase).split(' ');
 
   candidates.forEach(function (word) {
-    var count = result[word] || 0;
-    result[word] = (count + 1);
+    var count = 0;
+    if (result[word] !== undefined && typeof result[word] !== 'function') {
+      count = result[word];
+    }
+    result[word] = count + 1;
   });
 
   return result;
