@@ -5,13 +5,17 @@ function replaceToSpace(phrase) {
                .trim();
 }
 
+function isCountedWord(candidate) {
+  return candidate && typeof candidate !== 'function';
+}
+
 function words(phrase) {
   var result = {},
     candidates = replaceToSpace(phrase).split(' ');
 
   candidates.forEach(function (word) {
     var count = 0;
-    if (result[word] !== undefined && typeof result[word] !== 'function') {
+    if (isCountedWord(result[word])) {
       count = result[word];
     }
     result[word] = count + 1;
