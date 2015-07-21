@@ -1,3 +1,11 @@
+/*
+ * Some ideas to improve this iteration:
+ * 1. use `Array.prototype.reduce()` 
+ * 2. use `/\S+/g`
+ * 3. use `match()` instead of `split()`
+ * 4. use `Number(result[word])` to check if the property exists and
+ * it is a number
+ */
 function replaceToSpace(phrase) {
   return phrase.replace(/[\t\n\s]+/, ' ').trim();
 }
