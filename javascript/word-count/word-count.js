@@ -1,7 +1,3 @@
-function replaceToSpace(phrase) {
-  return phrase.replace(/[\t\n\s]+/, ' ').trim();
-}
-
 function isCountedWord(candidate) {
   return candidate && typeof candidate !== 'function';
 }
@@ -16,7 +12,7 @@ function countWords(result, word) {
 }
 
 function words(phrase) {
-  var candidates = replaceToSpace(phrase).split(' ');
+  var candidates = phrase.match(/\S+/g);
   return candidates.reduce(countWords, {});
 }
 
