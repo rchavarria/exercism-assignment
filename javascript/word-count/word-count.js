@@ -1,13 +1,5 @@
-function isCountedWord(candidate) {
-  return candidate && typeof candidate !== 'function';
-}
-
 function countWords(result, word) {
-  var count = 0;
-  if (isCountedWord(result[word])) {
-   count = result[word];
-  }
-  result[word] = count + 1;
+  result[word] = (Number(result[word]) || 0) + 1;
   return result;
 }
 
