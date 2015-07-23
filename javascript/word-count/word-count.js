@@ -1,12 +1,8 @@
-function countWords(result, word) {
-  result[word] = (Number(result[word]) || 0) + 1;
-  return result;
+module.exports = function (phrase) {
+  return phrase
+    .match(/\S+/g)
+    .reduce(function (words, each) {
+      words[each] = (Number(words[each]) || 0) + 1;
+      return words;
+    }, {});
 }
-
-function words(phrase) {
-  var candidates = phrase.match(/\S+/g);
-  return candidates.reduce(countWords, {});
-}
-
-module.exports = words;
-
