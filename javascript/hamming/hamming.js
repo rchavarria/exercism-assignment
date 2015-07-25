@@ -1,18 +1,27 @@
+// Strand class
+function Strand(strand) {
+  this.nucleotides = strand.split('');
+}
+
+Strand.prototype.computeHamming = function (otherStrand) {
+  if (this.nucleotides.length !== otherStrand.nucleotides.length) {
+    throw new Error('DNA strands must be of equal length.');
+  }
+
+  var differentNucleotides = this.nucleotides
+    .filter(function (nucleotide, i) {
+      return nucleotide !== otherStrand.nucleotides[i];
+    });
+  
+  return differentNucleotides.length;
+}
+
+// Hamming class
 function Hamming() {
 }
 
 Hamming.prototype.compute = function (strand1, strand2) {
-  if (strand1.length !== strand2.length) {
-    throw new Error('DNA strands must be of equal length.');
-  }
-
-  var differentNucleotides = strand1
-    .split('')
-    .filter(function (nucleotide, i) {
-      return nucleotide !== strand2[i];
-    });
-
-  return differentNucleotides.length;
+  return new Strand(strand1).computeHamming(new Strand(strand2));
 }
 
 module.exports = new Hamming();
