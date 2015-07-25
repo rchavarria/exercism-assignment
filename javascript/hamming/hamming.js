@@ -8,7 +8,9 @@ function compute(strand1, strand2) {
     distance = 0;
   
   for(i = 0; i < len; i++) {
-    distance += (strand1[i] === strand2[i]) ? 0 : 1;
+    if (strand1[i] !== strand2[i]) {
+      distance++;
+    }
   }
 
   return distance;
