@@ -3,7 +3,8 @@ function sortStringChars(str) {
 }
 
 function areAnagram(anagram, candidate) {
-  return sortStringChars(anagram) === sortStringChars(candidate);
+  return anagram.toLowerCase() !== candidate.toLowerCase() &&
+    sortStringChars(anagram) === sortStringChars(candidate);
 }
 
 function Subject(anagram) {
