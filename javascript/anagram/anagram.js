@@ -1,18 +1,11 @@
 function sortStringChars(str) {
-  return str.toLowerCase().split('').sort().join('');
-}
-
-function areAnagram(anagram, candidate) {
-  return anagram.toLowerCase() !== candidate.toLowerCase() &&
-    sortStringChars(anagram) === sortStringChars(candidate);
+  return str.split('').sort().join('');
 }
 
 function buildCandidatesAsArray(candidatesAsArgs) {
-  var i,
-    len = candidatesAsArgs.length,
-    candidates = [];
+  var i, len, candidates = [];
 
-  for(i = 0; i < len; i++) {
+  for(i = 0, len = candidatesAsArgs.length; i < len; i++) {
     candidates.push(candidatesAsArgs[i]);
   }
 
@@ -31,11 +24,15 @@ Subject.prototype.matches = function (candidates) {
     candidatesAsArray = buildCandidatesAsArray(arguments);
   }
 
-  matches = candidatesAsArray.filter(function (candidate) {
-    return areAnagram(this.anagram, candidate);
-  }, this);
+  return candidatesAsArray.filter(this.isAnagram, this);
+};
 
-  return matches;
+Subject.prototype.isAnagram = function (candidate) {
+  var lcAnagram = this.anagram.toLowerCase(),
+    lcCandidate = candidate.toLowerCase();
+
+  return lcAnagram !== lcCandidate &&
+    sortStringChars(lcAnagram) === sortStringChars(lcCandidate);
 }
 
 module.exports = function (anagram) {
