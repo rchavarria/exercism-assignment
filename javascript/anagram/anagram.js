@@ -10,10 +10,9 @@ function Subject(anagram) {
 }
 
 Subject.prototype.matches = function (candidates) {
-  var self = this,
-    matches = candidates.filter(function (candidate) {
-      return areAnagram(self.anagram, candidate);
-    });
+  var matches = candidates.filter(function (candidate) {
+    return areAnagram(this.anagram, candidate);
+  }, this);
 
   return matches;
 }
