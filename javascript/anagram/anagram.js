@@ -1,8 +1,9 @@
-function areAnagram(anagram, candidate) {
-  var sortedAnagram = anagram.split('').sort().join(''),
-    sortedCandidate = candidate.split('').sort().join('');
+function sortStringChars(str) {
+  return str.toLowerCase().split('').sort().join('');
+}
 
-  return sortedAnagram === sortedCandidate;
+function areAnagram(anagram, candidate) {
+  return sortStringChars(anagram) === sortStringChars(candidate);
 }
 
 function Subject(anagram) {
