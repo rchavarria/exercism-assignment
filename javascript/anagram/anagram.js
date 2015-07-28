@@ -14,6 +14,8 @@ function buildCandidatesAsArray(candidatesAsArgs) {
 
 function Subject(anagram) {
   this.anagram = anagram;
+  this.lcAnagram = anagram.toLowerCase();
+  this.sortedAnagram = sortStringChars(this.lcAnagram);
 }
 
 Subject.prototype.matches = function (candidates) {
@@ -28,11 +30,9 @@ Subject.prototype.matches = function (candidates) {
 };
 
 Subject.prototype.isAnagram = function (candidate) {
-  var lcAnagram = this.anagram.toLowerCase(),
-    lcCandidate = candidate.toLowerCase();
-
-  return lcAnagram !== lcCandidate &&
-    sortStringChars(lcAnagram) === sortStringChars(lcCandidate);
+  var lcCandidate = candidate.toLowerCase();
+  return this.lcAnagram !== lcCandidate &&
+    this.sortedAnagram === sortStringChars(lcCandidate);
 }
 
 module.exports = function (anagram) {
