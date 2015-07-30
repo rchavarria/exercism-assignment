@@ -1,32 +1,37 @@
 (function () {
 
-  function Song() {
+  function firstLine(verseIndex) {
+    var animals = ['fly', 'spider', 'bird'];
+    return 'I know an old lady who swallowed a ' + animals[verseIndex - 1] + '.';
   }
 
+  function Song() { }
+
   Song.prototype.verse = function (verseIndex) {
-    var verse = '';
+    var verses = [];
 
     if (verseIndex === 1) {
-      verse += 'I know an old lady who swallowed a fly.\n';
-      verse += 'I don\'t know why she swallowed the fly. Perhaps she\'ll die.\n';
+      verses.push(firstLine(verseIndex));
+      verses.push('I don\'t know why she swallowed the fly. Perhaps she\'ll die.');
     }
 
     if (verseIndex === 2) {
-      verse += 'I know an old lady who swallowed a spider.\n';
-      verse += 'It wriggled and jiggled and tickled inside her.\n';
-      verse += 'She swallowed the spider to catch the fly.\n';
-      verse += 'I don\'t know why she swallowed the fly. Perhaps she\'ll die.\n';
+      verses.push(firstLine(verseIndex));
+      verses.push('It wriggled and jiggled and tickled inside her.');
+      verses.push('She swallowed the spider to catch the fly.');
+      verses.push('I don\'t know why she swallowed the fly. Perhaps she\'ll die.');
     }
 
     if (verseIndex === 3) {
-      verse += 'I know an old lady who swallowed a bird.\n';
-      verse += "How absurd to swallow a bird!\n";
-      verse += "She swallowed the bird to catch the spider that wriggled and jiggled and tickled inside her.\n";
-      verse += "She swallowed the spider to catch the fly.\n";
-      verse += "I don't know why she swallowed the fly. Perhaps she'll die.\n";
+      verses.push(firstLine(verseIndex));
+      verses.push('How absurd to swallow a bird!');
+      verses.push('She swallowed the bird to catch the spider that wriggled and jiggled and tickled inside her.');
+      verses.push('She swallowed the spider to catch the fly.');
+      verses.push('I don\'t know why she swallowed the fly. Perhaps she\'ll die.');
     }
 
-    return verse;
+    verses.push('');
+    return verses.join('\n');
   };
 
   module.exports = new Song();
