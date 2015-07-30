@@ -38,16 +38,7 @@
       verses = []
         .concat(firstLine(verseIndex))
         .concat(lastLines(verseIndex));
-    }
-
-    if (verseIndex === 2) {
-      verses = []
-        .concat(firstLine(verseIndex))
-        .concat(intermediateLines(verseIndex))
-        .concat(lastLines(verseIndex));
-    }
-
-    if (verseIndex === 3) {
+    } else {
       verses = []
         .concat(firstLine(verseIndex))
         .concat(intermediateLines(verseIndex))
