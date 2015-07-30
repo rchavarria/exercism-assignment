@@ -38,15 +38,13 @@
   function Song() { }
 
   Song.prototype.verse = function (verseIndex) {
-    var verses;
-
-    verses = []
+    return []
       .concat(firstLine(verseIndex))
       .concat(intermediateLines(verseIndex))
-      .concat(lastLines(verseIndex));
-
-    verses.push('');
-    return verses.filter(function (v) { return v !== null; }).join('\n');
+      .concat(lastLines(verseIndex))
+      .concat('')
+      .filter(function (v) { return v !== null; })
+      .join('\n');
   };
 
   module.exports = new Song();
