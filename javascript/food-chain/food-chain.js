@@ -13,6 +13,8 @@
         return [ 'How absurd to swallow a bird!' ];
       case 2:
         return [ 'It wriggled and jiggled and tickled inside her.' ];
+      case 1:
+        return null;
     }
   }
 
@@ -38,19 +40,13 @@
   Song.prototype.verse = function (verseIndex) {
     var verses;
 
-    if (verseIndex === 1) {
-      verses = []
-        .concat(firstLine(verseIndex))
-        .concat(lastLines(verseIndex));
-    } else {
-      verses = []
-        .concat(firstLine(verseIndex))
-        .concat(intermediateLines(verseIndex))
-        .concat(lastLines(verseIndex));
-    }
+    verses = []
+      .concat(firstLine(verseIndex))
+      .concat(intermediateLines(verseIndex))
+      .concat(lastLines(verseIndex));
 
     verses.push('');
-    return verses.join('\n');
+    return verses.filter(function (v) { return v !== null; }).join('\n');
   };
 
   module.exports = new Song();
