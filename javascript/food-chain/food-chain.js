@@ -2,7 +2,16 @@
 
   function firstLine(verseIndex) {
     var animals = ['fly', 'spider', 'bird'];
-    return 'I know an old lady who swallowed a ' + animals[verseIndex - 1] + '.';
+    return [ 'I know an old lady who swallowed a ' + animals[verseIndex - 1] + '.' ];
+  }
+
+  function intermediateLines(verseIndex) {
+    switch(verseIndex) {
+      case 3:
+        return [ 'How absurd to swallow a bird!' ];
+      case 2:
+        return [ 'It wriggled and jiggled and tickled inside her.' ];
+    }
   }
 
   function lastLines(verseIndex) {
@@ -23,26 +32,27 @@
   function Song() { }
 
   Song.prototype.verse = function (verseIndex) {
-    var verses = [];
+    var verses;
 
     if (verseIndex === 1) {
-      verses.push(firstLine(verseIndex));
-      verses = verses.concat(lastLines(verseIndex));
+      verses = []
+        .concat(firstLine(verseIndex))
+        .concat(lastLines(verseIndex));
     }
 
     if (verseIndex === 2) {
-      verses.push(firstLine(verseIndex));
-      verses.push('It wriggled and jiggled and tickled inside her.');
-      verses = verses.concat(lastLines(verseIndex));
+      verses = []
+        .concat(firstLine(verseIndex))
+        .concat(intermediateLines(verseIndex))
+        .concat(lastLines(verseIndex));
     }
 
     if (verseIndex === 3) {
-      verses.push(firstLine(verseIndex));
-      verses.push('How absurd to swallow a bird!');
-      verses = verses.concat(lastLines(verseIndex));
+      verses = []
+        .concat(firstLine(verseIndex))
+        .concat(intermediateLines(verseIndex))
+        .concat(lastLines(verseIndex));
     }
-
-    console.log(verses);
 
     verses.push('');
     return verses.join('\n');
