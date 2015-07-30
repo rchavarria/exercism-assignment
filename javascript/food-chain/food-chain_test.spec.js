@@ -8,7 +8,7 @@ describe('Food Chain', function () {
     expect(song.verse(1)).toEqual(expected);
   });
 
-  xit('spider', function () {
+  it('spider', function () {
     var expected = "I know an old lady who swallowed a spider.\nIt wriggled and jiggled and tickled inside her.\n" +
       "She swallowed the spider to catch the fly.\n" + "I don't know why she swallowed the fly. Perhaps she'll die.\n";
 
