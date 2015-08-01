@@ -79,7 +79,7 @@ describe('Food Chain', function () {
     expect(song.verse(7)).toEqual(expected);
   });
 
-  xit('horse', function () {
+  it('horse', function () {
     var expected = "I know an old lady who swallowed a horse.\n" + "She's dead, of course!\n";
 
     expect(song.verse(8)).toEqual(expected);
