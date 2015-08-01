@@ -1,12 +1,14 @@
 (function () {
 
   function firstLine(verseIndex) {
-    var animals = [ 'fly', 'spider', 'bird', 'cat', 'dog', 'goat' ];
+    var animals = [ 'fly', 'spider', 'bird', 'cat', 'dog', 'goat', 'cow' ];
     return [ 'I know an old lady who swallowed a ' + animals[verseIndex - 1] + '.' ];
   }
 
   function intermediateLines(verseIndex) {
     switch(verseIndex) {
+      case 7:
+        return [ 'I don\'t know how she swallowed a cow!' ];
       case 6:
         return [ 'Just opened her throat and swallowed a goat!' ];
       case 5:
@@ -26,6 +28,8 @@
     var lines = [];
 
     switch(verseIndex) {
+      case 7:
+        lines.push('She swallowed the cow to catch the goat.');
       case 6:
         lines.push('She swallowed the goat to catch the dog.');
       case 5:
