@@ -53,14 +53,25 @@
 
   function Song() { }
 
-  Song.prototype.verse = function (verseIndex) {
+  Song.prototype.verse = function (index) {
     return []
-      .concat(firstLine(verseIndex))
-      .concat(intermediateLines(verseIndex))
-      .concat(lastLines(verseIndex))
+      .concat(firstLine(index))
+      .concat(intermediateLines(index))
+      .concat(lastLines(index))
       .concat('')
       .filter(function (v) { return v !== null; })
       .join('\n');
+  };
+
+  Song.prototype.verses = function (firstIndex, secondIndex) {
+    var i, verses = [];
+
+    for (i = firstIndex; i <= secondIndex; i++) {
+      verses.push(this.verse(i));
+    }
+
+    verses.push('');
+    return verses.join('\n');
   };
 
   module.exports = new Song();
