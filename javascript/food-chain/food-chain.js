@@ -1,29 +1,16 @@
 (function () {
-
-  function firstLine(verseIndex) {
-    var animals = [ 'fly', 'spider', 'bird', 'cat', 'dog', 'goat', 'cow', 'horse' ];
-    return [ 'I know an old lady who swallowed a ' + animals[verseIndex - 1] + '.' ];
-  }
-
-  function intermediateLines(verseIndex) {
-    var lines = [
-        null,
-        'It wriggled and jiggled and tickled inside her.',
-        'How absurd to swallow a bird!',
-        'Imagine that, to swallow a cat!',
-        'What a hog, to swallow a dog!',
-        'Just opened her throat and swallowed a goat!',
-        'I don\'t know how she swallowed a cow!',
-        'She\'s dead, of course!'
-    ];
-
-    return lines[verseIndex - 1];
-  }
-
-  function lastLines(verseIndex) {
-    var i,
-      lines = [],
-      lastLines = [
+  var ANIMALS = [ 'fly', 'spider', 'bird', 'cat', 'dog', 'goat', 'cow', 'horse' ],
+    INTERMEDIATE_LINES = [
+      null,
+      'It wriggled and jiggled and tickled inside her.',
+      'How absurd to swallow a bird!',
+      'Imagine that, to swallow a cat!',
+      'What a hog, to swallow a dog!',
+      'Just opened her throat and swallowed a goat!',
+      'I don\'t know how she swallowed a cow!',
+      'She\'s dead, of course!'
+    ],
+    LAST_LINES = [
         'I don\'t know why she swallowed the fly. Perhaps she\'ll die.',
         'She swallowed the spider to catch the fly.',
         'She swallowed the bird to catch the spider that wriggled and jiggled and tickled inside her.',
@@ -33,8 +20,21 @@
         'She swallowed the cow to catch the goat.'
       ];
 
-    for (i = verseIndex - 1; i >= 0 && i < lastLines.length; i--) {
-      lines.push(lastLines[i]);
+  function firstLine(verseIndex) {
+    return 'I know an old lady who swallowed a ' + ANIMALS[verseIndex - 1] + '.';
+  }
+
+  function intermediateLines(verseIndex) {
+    return INTERMEDIATE_LINES[verseIndex - 1];
+  }
+
+  function lastLines(verseIndex) {
+    var i,
+      lines = [],
+      len = LAST_LINES.length;
+
+    for (i = verseIndex - 1; i >= 0 && i < len; i--) {
+      lines.push(LAST_LINES[i]);
     }
 
     return lines.length === 0 ? null : lines;
