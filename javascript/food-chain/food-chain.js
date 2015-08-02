@@ -21,28 +21,23 @@
   }
 
   function lastLines(verseIndex) {
-    var lines = [];
+    var i,
+      lines = [],
+      lastLines = [
+        'I don\'t know why she swallowed the fly. Perhaps she\'ll die.',
+        'She swallowed the spider to catch the fly.',
+        'She swallowed the bird to catch the spider that wriggled and jiggled and tickled inside her.',
+        'She swallowed the cat to catch the bird.',
+        'She swallowed the dog to catch the cat.',
+        'She swallowed the goat to catch the dog.',
+        'She swallowed the cow to catch the goat.'
+      ];
 
-    switch(verseIndex) {
-      case 8:
-        return null;
-      case 7:
-        lines.push('She swallowed the cow to catch the goat.');
-      case 6:
-        lines.push('She swallowed the goat to catch the dog.');
-      case 5:
-        lines.push('She swallowed the dog to catch the cat.');
-      case 4:
-        lines.push('She swallowed the cat to catch the bird.');
-      case 3:
-        lines.push('She swallowed the bird to catch the spider that wriggled and jiggled and tickled inside her.');
-      case 2:
-        lines.push('She swallowed the spider to catch the fly.');
-      case 1:
-        lines.push('I don\'t know why she swallowed the fly. Perhaps she\'ll die.');
+    for (i = verseIndex - 1; i >= 0 && i < lastLines.length; i--) {
+      lines.push(lastLines[i]);
     }
 
-    return lines;
+    return lines.length === 0 ? null : lines;
   }
 
   function Song() { }
