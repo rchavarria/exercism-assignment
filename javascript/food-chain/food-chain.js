@@ -6,24 +6,18 @@
   }
 
   function intermediateLines(verseIndex) {
-    switch(verseIndex) {
-      case 8:
-        return [ 'She\'s dead, of course!' ];
-      case 7:
-        return [ 'I don\'t know how she swallowed a cow!' ];
-      case 6:
-        return [ 'Just opened her throat and swallowed a goat!' ];
-      case 5:
-        return [ 'What a hog, to swallow a dog!' ];
-      case 4:
-        return [ 'Imagine that, to swallow a cat!' ];
-      case 3:
-        return [ 'How absurd to swallow a bird!' ];
-      case 2:
-        return [ 'It wriggled and jiggled and tickled inside her.' ];
-      case 1:
-        return null;
-    }
+    var lines = [
+        null,
+        'It wriggled and jiggled and tickled inside her.',
+        'How absurd to swallow a bird!',
+        'Imagine that, to swallow a cat!',
+        'What a hog, to swallow a dog!',
+        'Just opened her throat and swallowed a goat!',
+        'I don\'t know how she swallowed a cow!',
+        'She\'s dead, of course!'
+    ];
+
+    return lines[verseIndex - 1];
   }
 
   function lastLines(verseIndex) {
