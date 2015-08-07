@@ -40,10 +40,11 @@
     return lines.length === 0 ? null : lines;
   }
 
-  function Poem(animal, rhyme, previous) {
+  function Poem(animal, rhyme, previous, animalAction) {
     this.animal = animal;
     this.rhyme = rhyme;
     this.previous = previous;
+    this.animalAction = animalAction || '';
   }
 
   Poem.prototype.sing = function () {
@@ -60,8 +61,12 @@
 
   Poem.prototype.chain = function (currentAnimal) {
     var chainedVerses = [];
-    chainedVerses.push('She swallowed the ' + currentAnimal + ' to catch the ' + this.animal + '.');
-    chainedVerses.push(this.rhyme);
+    chainedVerses.push('She swallowed the ' + currentAnimal + ' to catch the ' + this.animal + this.animalAction + '.');
+    if (this.previous) {
+      chainedVerses = chainedVerses.concat(this.previous.chain(this.animal));
+    } else {
+      chainedVerses.push(this.rhyme);
+    }
     return chainedVerses;
   }
 
@@ -70,7 +75,8 @@
         'I don\'t know why she swallowed the fly. Perhaps she\'ll die.'),
       spider = new Poem('spider',
           'It wriggled and jiggled and tickled inside her.',
-          fly),
+          fly,
+          ' that wriggled and jiggled and tickled inside her'),
       bird = new Poem('bird',
           'How absurd to swallow a bird!',
           spider);
@@ -83,7 +89,7 @@
   }
 
   Song.prototype.verse = function (index) {
-    if (index <= 2) {
+    if (index <= 3) {
       return this.chainedVerse(index);
     }
 
