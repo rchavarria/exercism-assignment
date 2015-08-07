@@ -40,28 +40,34 @@
     return lines.length === 0 ? null : lines;
   }
 
-  function Poem(animal, start, end) {
+  function Poem(animal, rhyme, end, previous) {
     this.animal = animal;
-    this.start = start;
+    this.rhyme = rhyme;
     this.end = end;
+    this.previous = previous;
   }
 
   Poem.prototype.sing = function () {
     var verses = [];
-    verses.push(this.start + this.animal + '.');
+    verses.push('I know an old lady who swallowed a ' + this.animal + '.');
+    verses.push(this.rhyme);
+    if (this.previous) {
+      verses.push('She swallowed the ' + this.animal + ' to catch the ' + this.previous.animal + '.');
+    }
     verses.push(this.end);
     verses.push('');
-    return verses;
+    return verses
+      .filter(function (v) { return v !== null; });
   }
 
   function Song() {
-    this.poems = [
-      new Poem(
-          'fly',
-          'I know an old lady who swallowed a ',
-          'I don\'t know why she swallowed the fly. Perhaps she\'ll die.'
-          )
-      ];
+    var fly = new Poem('fly', null, 'I don\'t know why she swallowed the fly. Perhaps she\'ll die.'),
+      spider = new Poem('spider',
+          'It wriggled and jiggled and tickled inside her.',
+          'I don\'t know why she swallowed the fly. Perhaps she\'ll die.',
+          fly);
+
+    this.poems = [ fly, spider ];
   }
 
   Song.prototype.chainedVerse = function (index) {
@@ -69,7 +75,7 @@
   }
 
   Song.prototype.verse = function (index) {
-    if (index <= 1) {
+    if (index <= 2) {
       return this.chainedVerse(index);
     }
 
