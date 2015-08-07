@@ -84,11 +84,11 @@
           'Imagine that, to swallow a cat!',
           bird);
 
-    this.poems = [ fly, spider, bird, cat ];
+    this.poems = [ null, fly, spider, bird, cat ];
   }
 
   Song.prototype.chainedVerse = function (index) {
-    return this.poems[index - 1].sing().join('\n');
+    return this.poems[index].sing().join('\n');
   }
 
   Song.prototype.verse = function (index) {
