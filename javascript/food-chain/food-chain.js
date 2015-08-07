@@ -40,9 +40,39 @@
     return lines.length === 0 ? null : lines;
   }
 
-  function Song() { }
+  function Poem(animal, start, end) {
+    this.animal = animal;
+    this.start = start;
+    this.end = end;
+  }
+
+  Poem.prototype.sing = function () {
+    var verses = [];
+    verses.push(this.start + this.animal + '.');
+    verses.push(this.end);
+    verses.push('');
+    return verses;
+  }
+
+  function Song() {
+    this.poems = [
+      new Poem(
+          'fly',
+          'I know an old lady who swallowed a ',
+          'I don\'t know why she swallowed the fly. Perhaps she\'ll die.'
+          )
+      ];
+  }
+
+  Song.prototype.chainedVerse = function (index) {
+    return this.poems[index - 1].sing().join('\n');
+  }
 
   Song.prototype.verse = function (index) {
+    if (index <= 1) {
+      return this.chainedVerse(index);
+    }
+
     return []
       .concat(firstLine(index))
       .concat(intermediateLines(index))
