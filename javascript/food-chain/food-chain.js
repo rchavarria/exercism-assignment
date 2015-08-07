@@ -80,8 +80,11 @@
       bird = new Poem('bird',
           'How absurd to swallow a bird!',
           spider);
+      cat = new Poem('cat',
+          'Imagine that, to swallow a cat!',
+          bird);
 
-    this.poems = [ fly, spider, bird ];
+    this.poems = [ fly, spider, bird, cat ];
   }
 
   Song.prototype.chainedVerse = function (index) {
@@ -89,7 +92,7 @@
   }
 
   Song.prototype.verse = function (index) {
-    if (index <= 3) {
+    if (index <= 4) {
       return this.chainedVerse(index);
     }
 
