@@ -16,18 +16,26 @@
     }
     verses.push('');
     return verses
-      .filter(function (v) { return v !== null; });
+      .filter(function (v) { return v !== null; })
+      .join('\n');
   }
 
   Poem.prototype.chain = function (currentAnimal) {
-    var chainedVerses = [];
-    chainedVerses.push('She swallowed the ' + currentAnimal + ' to catch the ' + this.animal + this.animalAction + '.');
+    var initial = 'She swallowed the ' +
+                  currentAnimal +
+                  ' to catch the ' +
+                  this.animal +
+                  this.animalAction +
+                  '.',
+      endVerses = [ this.rhyme ];
+
     if (this.previousPoem) {
-      chainedVerses = chainedVerses.concat(this.previousPoem.chain(this.animal));
-    } else {
-      chainedVerses.push(this.rhyme);
+      endVerses = this.previousPoem.chain(this.animal);
     }
-    return chainedVerses;
+    
+    return []
+      .concat(initial)
+      .concat(endVerses);
   }
 
   function Song() {
@@ -59,7 +67,7 @@
   }
 
   Song.prototype.verse = function (index) {
-    return this.poems[index].sing().join('\n');
+    return this.poems[index].sing();
   };
 
   Song.prototype.verses = function (firstIndex, secondIndex) {
