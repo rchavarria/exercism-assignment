@@ -8,14 +8,16 @@
   }
 
   Poem.prototype.sing = function () {
-    var verses = [];
-    verses.push('I know an old lady who swallowed a ' + this.animal + '.');
-    verses.push(this.rhyme);
+    var versesChain = null;
     if (this.previousPoem) {
-      verses = verses.concat(this.previousPoem.chain(this.animal));
+      versesChain = this.previousPoem.chain(this.animal);
     }
-    verses.push('');
-    return verses
+
+    return []
+      .concat('I know an old lady who swallowed a ' + this.animal + '.')
+      .concat(this.rhyme)
+      .concat(versesChain)
+      .concat('')
       .filter(function (v) { return v !== null; })
       .join('\n');
   }
