@@ -103,17 +103,7 @@
   }
 
   Song.prototype.verse = function (index) {
-    if (index <= 8) {
-      return this.chainedVerse(index);
-    }
-
-    return []
-      .concat(firstLine(index))
-      .concat(intermediateLines(index))
-      .concat(lastLines(index))
-      .concat('')
-      .filter(function (v) { return v !== null; })
-      .join('\n');
+    return this.chainedVerse(index);
   };
 
   Song.prototype.verses = function (firstIndex, secondIndex) {
