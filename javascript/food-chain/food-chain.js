@@ -98,12 +98,8 @@
     this.poems = [ null, fly, spider, bird, cat, dog, goat, cow, horse ];
   }
 
-  Song.prototype.chainedVerse = function (index) {
-    return this.poems[index].sing().join('\n');
-  }
-
   Song.prototype.verse = function (index) {
-    return this.chainedVerse(index);
+    return this.poems[index].sing().join('\n');
   };
 
   Song.prototype.verses = function (firstIndex, secondIndex) {
