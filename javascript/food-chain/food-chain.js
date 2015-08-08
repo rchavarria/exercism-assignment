@@ -79,12 +79,23 @@
           ' that wriggled and jiggled and tickled inside her'),
       bird = new Poem('bird',
           'How absurd to swallow a bird!',
-          spider);
+          spider),
       cat = new Poem('cat',
           'Imagine that, to swallow a cat!',
-          bird);
+          bird),
+      dog = new Poem('dog',
+          'What a hog, to swallow a dog!',
+          cat),
+      goat = new Poem('goat',
+          'Just opened her throat and swallowed a goat!',
+          dog),
+      cow = new Poem('cow',
+          'I don\'t know how she swallowed a cow!',
+          goat),
+      horse = new Poem('horse',
+          'She\'s dead, of course!');
 
-    this.poems = [ null, fly, spider, bird, cat ];
+    this.poems = [ null, fly, spider, bird, cat, dog, goat, cow, horse ];
   }
 
   Song.prototype.chainedVerse = function (index) {
@@ -92,7 +103,7 @@
   }
 
   Song.prototype.verse = function (index) {
-    if (index <= 4) {
+    if (index <= 8) {
       return this.chainedVerse(index);
     }
 
