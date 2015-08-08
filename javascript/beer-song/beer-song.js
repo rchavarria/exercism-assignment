@@ -1,6 +1,55 @@
 
+function howManyBottles(n) {
+  var quantity = n.toString();
+  if (n === 0) {
+    quantity = 'no more';
+  }
+
+  var bottles = 'bottles';
+  if (n === 1) {
+    bottles = 'bottle';
+  }
+  
+  return quantity + ' ' + bottles;
+}
+
+function currentBottles(n) {
+  var howMany = howManyBottles(n);
+  return howMany + ' of beer on the wall, ' + howMany + ' of beer.';
+}
+
+function takeOneDown(n) {
+  var howMany = howManyBottles(n - 1);
+  var takeDown = 'Take one down';
+  if (n === 1) {
+    takeDown = 'Take it down';
+  }
+
+  return takeDown + ' and pass it around, ' + howMany + ' of beer on the wall.';
+}
+
+function Quantity (n) {
+  this.n = n;
+
+  this.toString = function () {
+    if (this.n < 1) {
+      return 'no more bottles';
+    }
+
+    if (this.n === 1) {
+      return '1 bottle';
+    }
+
+    return this.n + ' bottles';
+  }
+}
+
 module.exports = {
-  verse: function (index) {
-    return "8 bottles of beer on the wall, 8 bottles of beer.\nTake one down and pass it around, 7 bottles of beer on the wall.\n";
+  verse: function (n) {
+    return []
+      .concat(currentBottles(n))
+      .concat(takeOneDown(n))
+      .concat('')
+      .join('\n');
   }
 };
