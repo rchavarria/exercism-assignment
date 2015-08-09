@@ -35,6 +35,7 @@ function end(n) {
 }
 
 module.exports = {
+
   verse: function (n) {
     return []
       .concat(start(n))
@@ -45,6 +46,7 @@ module.exports = {
 
   sing: function (first, last) {
     var i, verses = [];
+    last = last || 0;
 
     for (i = first; i >= last; i--) {
       verses.push(this.verse(i));
@@ -52,4 +54,5 @@ module.exports = {
 
     return verses.join('\n');
   }
+
 };
