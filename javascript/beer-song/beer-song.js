@@ -1,13 +1,26 @@
 'use strict';
 
-function format(message, params) {
-  return message
-    .replace(/\{0\}/g, params[0])
-    .replace(/\{1\}/g, params[1]);
+function takeOneDown(n) {
+  switch(n) {
+    case 1: return 'Take it down and pass it around';
+    case 0: return 'Go to the store and buy some more';
+    default: return 'Take one down and pass it around';
+  }
+}
+
+function end(n) {
+  var params = [ takeOneDown(n), bottlesOfBeer(n - 1) ];
+  return format('{0}, {1} of beer on the wall.', params);
 }
 
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function format(message, params) {
+  return message
+    .replace(/\{0\}/g, params[0])
+    .replace(/\{1\}/g, params[1]);
 }
 
 function pluralize(n) {
@@ -31,19 +44,6 @@ function start(n) {
   var params = [ bottlesOfBeer(n) ];
   var result = format('{0} of beer on the wall, {0} of beer.', params);
   return capitalize(result);
-}
-
-function takeOneDown(n) {
-  switch(n) {
-    case 1: return 'Take it down and pass it around';
-    case 0: return 'Go to the store and buy some more';
-    default: return 'Take one down and pass it around';
-  }
-}
-
-function end(n) {
-  var params = [ takeOneDown(n), bottlesOfBeer(n - 1) ];
-  return format('{0}, {1} of beer on the wall.', params);
 }
 
 module.exports = {
