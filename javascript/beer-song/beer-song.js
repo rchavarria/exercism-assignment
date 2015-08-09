@@ -35,22 +35,6 @@ function takeOneDown(n) {
   return takeDown + howMany + ' of beer on the wall.';
 }
 
-function Quantity (n) {
-  this.n = n;
-
-  this.toString = function () {
-    if (this.n < 1) {
-      return 'no more bottles';
-    }
-
-    if (this.n === 1) {
-      return '1 bottle';
-    }
-
-    return this.n + ' bottles';
-  }
-}
-
 module.exports = {
   verse: function (n) {
     return []
