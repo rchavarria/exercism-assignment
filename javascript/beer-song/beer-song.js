@@ -1,45 +1,44 @@
+'use strict';
 
-function howManyBottles(n) {
-  var quantity = n.toString();
-  if (n === 0) {
-    quantity = 'no more';
-  }
-  if (n === -1) {
-    quantity = 99;
-  }
-
-  var bottles = 'bottles';
-  if (n === 1) {
-    bottles = 'bottle';
-  }
-  
-  return quantity + ' ' + bottles;
+function pluralize(n) {
+  var suffix = (n === 1) ? '' : 's';
+  return 'bottle' + suffix;
 }
 
-function currentBottles(n) {
-  var howMany = howManyBottles(n);
-  var howManyUpperCased = howMany.charAt(0).toUpperCase() + howMany.substring(1, howMany.length);
-  return howManyUpperCased + ' of beer on the wall, ' + howMany + ' of beer.';
+function bottles(n) {
+  switch(n) {
+    case 0: return 'no more';
+    case -1: return '99';
+    default: return n.toString();
+  }
+}
+
+function start(n) {
+  var howMany = bottles(n) + ' ' + pluralize(n);
+  var result = howMany + ' of beer on the wall, ' + howMany + ' of beer.';
+  return result.charAt(0).toUpperCase() + result.substring(1, result.length);
 }
 
 function takeOneDown(n) {
-  var howMany = howManyBottles(n - 1);
-  var takeDown = 'Take one down and pass it around, '
-  if (n === 1) {
-    takeDown = 'Take it down and pass it around, ';
+  switch(n) {
+    case 1: return 'Take it down and pass it around, ';
+    case 0: return 'Go to the store and buy some more, ';
+    default: return 'Take one down and pass it around, ';
   }
-  if (n === 0) {
-    takeDown = 'Go to the store and buy some more, ';
-  }
+}
 
-  return takeDown + howMany + ' of beer on the wall.';
+function end(n) {
+  var takeDown = takeOneDown(n);
+  var howMany = bottles(n - 1) + ' ' + pluralize(n - 1) + ' of beer on the wall.';
+
+  return takeDown + howMany;
 }
 
 module.exports = {
   verse: function (n) {
     return []
-      .concat(currentBottles(n))
-      .concat(takeOneDown(n))
+      .concat(start(n))
+      .concat(end(n))
       .concat('')
       .join('\n');
   }
