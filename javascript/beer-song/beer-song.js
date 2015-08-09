@@ -41,5 +41,15 @@ module.exports = {
       .concat(end(n))
       .concat('')
       .join('\n');
+  },
+
+  sing: function (first, last) {
+    var i, verses = [];
+
+    for (i = first; i >= last; i--) {
+      verses.push(this.verse(i));
+    }
+
+    return verses.join('\n');
   }
 };
