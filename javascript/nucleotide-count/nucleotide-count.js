@@ -18,7 +18,7 @@ function dna(dnaStrand) {
       return {
         A: 0,
         C: 0,
-        G: 0,
+        G: this.count('G'),
         T: 0
       };
     }

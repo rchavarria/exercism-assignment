@@ -26,7 +26,7 @@ describe('DNA', function() {
     expect(dna().histogram()).toEqual(expected);
   });
 
-  xit('Repetitive sequence has only guanosine', function() {
+  it('Repetitive sequence has only guanosine', function() {
     var expected = {A: 0, T: 0, C: 0, G: 8};
     expect(dna('GGGGGGGG').histogram()).toEqual(expected);
   });
