@@ -24,7 +24,7 @@ Strand.prototype.histogram = function () {
   };
 };
 
-function dna(dnaStrand) {
+module.exports = function StrandFactory (dnaStrand) {
   var VALID_STRAND_NUCLEOTIDES = /[^ACGT]/,
     strand = dnaStrand || '';
 
@@ -33,6 +33,5 @@ function dna(dnaStrand) {
   }
 
   return new Strand(strand);
-}
+};
 
-module.exports = dna;
