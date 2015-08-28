@@ -31,7 +31,7 @@ describe('DNA', function() {
     expect(dna('GGGGGGGG').histogram()).toEqual(expected);
   });
 
-  xit('Counts all nucleotides', function() {
+  it('Counts all nucleotides', function() {
     var strand = 'AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC';
     var expected = {A: 20, T: 21, C: 12, G: 17};
     expect(dna(strand).histogram()).toEqual(expected);

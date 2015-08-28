@@ -16,10 +16,10 @@ function dna(dnaStrand) {
 
     histogram: function () {
       return {
-        A: 0,
-        C: 0,
+        A: this.count('A'),
+        C: this.count('C'),
         G: this.count('G'),
-        T: 0
+        T: this.count('T')
       };
     }
 
