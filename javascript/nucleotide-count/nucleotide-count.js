@@ -12,7 +12,17 @@ function dna(dnaStrand) {
       });
 
       return n;
+    },
+
+    histogram: function () {
+      return {
+        A: 0,
+        C: 0,
+        G: 0,
+        T: 0
+      };
     }
+
   };
 }
 
