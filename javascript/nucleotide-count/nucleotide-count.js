@@ -4,7 +4,14 @@ function dna(dnaStrand) {
 
   return {
     count: function (nucleotide) {
-      return strand.length;
+      var n = 0;
+      strand.split('').forEach(function (i) {
+        if (i === nucleotide) {
+          n++;
+        }
+      });
+
+      return n;
     }
   };
 }

@@ -10,7 +10,7 @@ describe('DNA', function() {
     expect(dna('CCCCC').count('C')).toEqual(5);
   });
 
-  xit('Counts only thymidine', function() {
+  it('Counts only thymidine', function() {
     expect(dna('GGGGGTAACCCGG').count('T')).toEqual(1);
   });
 
