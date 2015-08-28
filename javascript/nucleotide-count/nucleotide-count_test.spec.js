@@ -6,7 +6,7 @@ describe('DNA', function() {
     expect(dna().count('A')).toEqual(0);
   });
 
-  xit('Repetitive cytidine gets counted', function() {
+  it('Repetitive cytidine gets counted', function() {
     expect(dna('CCCCC').count('C')).toEqual(5);
   });
 
