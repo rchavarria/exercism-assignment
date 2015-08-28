@@ -1,4 +1,29 @@
 
+function Strand(dnaStrand) {
+  this.strand = dnaStrand;
+}
+
+Strand.prototype.count = function (nucleotide) {
+  var n = 0;
+
+  this.strand.split('').forEach(function (i) {
+    if (i === nucleotide) {
+      n++;
+    }
+  });
+
+  return n;
+};
+
+Strand.prototype.histogram = function () {
+  return {
+    A: this.count('A'),
+    C: this.count('C'),
+    G: this.count('G'),
+    T: this.count('T')
+  };
+};
+
 function dna(dnaStrand) {
   var VALID_STRAND_NUCLEOTIDES = /[^ACGT]/,
     strand = dnaStrand || '';
@@ -7,28 +32,7 @@ function dna(dnaStrand) {
     throw new Error('DNA strand [' + strand + '] has no valid nucleotides');
   }
 
-  return {
-    count: function (nucleotide) {
-      var n = 0;
-      strand.split('').forEach(function (i) {
-        if (i === nucleotide) {
-          n++;
-        }
-      });
-
-      return n;
-    },
-
-    histogram: function () {
-      return {
-        A: this.count('A'),
-        C: this.count('C'),
-        G: this.count('G'),
-        T: this.count('T')
-      };
-    }
-
-  };
+  return new Strand(strand);
 }
 
 module.exports = dna;
