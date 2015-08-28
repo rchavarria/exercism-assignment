@@ -2,6 +2,10 @@
 function dna(dnaStrand) {
   var strand = dnaStrand || '';
 
+  if (/[^ACGT]/.test(strand)) {
+    throw new Error('DNA strand has no valid nucleotides');
+  }
+
   return {
     count: function (nucleotide) {
       var n = 0;

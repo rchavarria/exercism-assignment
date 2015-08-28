@@ -37,7 +37,7 @@ describe('DNA', function() {
     expect(dna(strand).histogram()).toEqual(expected);
   });
 
-  xit('Validates DNA', function() {
+  it('Validates DNA', function() {
     expect(dna.bind(null, 'JOHNNYAPPLESEED')).toThrow();
   });
 
