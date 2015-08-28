@@ -1,9 +1,10 @@
 
 function dna(dnaStrand) {
-  var strand = dnaStrand || '';
+  var VALID_STRAND_NUCLEOTIDES = /[^ACGT]/,
+    strand = dnaStrand || '';
 
-  if (/[^ACGT]/.test(strand)) {
-    throw new Error('DNA strand has no valid nucleotides');
+  if (VALID_STRAND_NUCLEOTIDES.test(strand)) {
+    throw new Error('DNA strand [' + strand + '] has no valid nucleotides');
   }
 
   return {
