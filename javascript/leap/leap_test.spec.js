@@ -9,7 +9,7 @@ describe("Year", function() {
     expect(isLeapYear(1997)).not.toBe(true);
   });
 
-  xit("turn of the 20th century", function() {
+  it("turn of the 20th century", function() {
     expect(isLeapYear(1900)).not.toBe(true);
   });
 
