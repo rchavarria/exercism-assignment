@@ -5,7 +5,7 @@ describe("Year", function() {
     expect(isLeapYear(1996)).toBe(true);
   });
 
-  xit("any old year", function() {
+  it("any old year", function() {
     expect(isLeapYear(1997)).not.toBe(true);
   });
 

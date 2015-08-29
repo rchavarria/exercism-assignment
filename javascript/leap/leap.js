@@ -1,4 +1,4 @@
 
 module.exports = function isLeap(year) {
-  return true;
+  return (year % 4) === 0;
 }
