@@ -1,28 +1,36 @@
 
-function Strand(dnaStrand) {
-  this.strand = dnaStrand;
-}
-
-Strand.prototype.count = function (nucleotide) {
-  return this.strand.split(nucleotide).length - 1;
-};
-
-Strand.prototype.histogram = function () {
+function computeHistogram(strand) {
   var nucleotideHistogram = { A: 0, C: 0, G: 0, T: 0 };
-  this.strand.split('').forEach(function (i) {
+
+  strand.split('').forEach(function (i) {
     nucleotideHistogram[i]++;
   });
+
   return nucleotideHistogram;
-};
+}
+
+function NucleotideHistogram(histogram) {
+  this.cachedHistogram = histogram;
+}
+
+NucleotideHistogram.prototype.count = function (nucleotide) {
+  return this.cachedHistogram[nucleotide];
+}
+
+NucleotideHistogram.prototype.histogram = function () {
+  return this.cachedHistogram;
+}
 
 module.exports = function StrandFactory (dnaStrand) {
   var VALID_STRAND_NUCLEOTIDES = /[^ACGT]/,
+    histogram,
     strand = dnaStrand || '';
 
   if (VALID_STRAND_NUCLEOTIDES.test(strand)) {
     throw new Error('DNA strand [' + strand + '] has no valid nucleotides');
   }
 
-  return new Strand(strand);
+  histogram = computeHistogram(strand);
+  return new NucleotideHistogram(histogram);
 };
 
