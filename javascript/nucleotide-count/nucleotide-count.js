@@ -4,14 +4,7 @@ function Strand(dnaStrand) {
 }
 
 Strand.prototype.count = function (nucleotide) {
-  return this.strand.split('').reduce(function (sum, i) {
-    var increment = 0;
-    if (i === nucleotide) {
-      increment = 1;
-    }
-
-    return sum + increment;
-  }, 0);
+  return this.strand.split(nucleotide).length - 1;
 };
 
 Strand.prototype.histogram = function () {
