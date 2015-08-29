@@ -8,12 +8,11 @@ Strand.prototype.count = function (nucleotide) {
 };
 
 Strand.prototype.histogram = function () {
-  return {
-    A: this.count('A'),
-    C: this.count('C'),
-    G: this.count('G'),
-    T: this.count('T')
-  };
+  var nucleotideHistogram = { A: 0, C: 0, G: 0, T: 0 };
+  this.strand.split('').forEach(function (i) {
+    nucleotideHistogram[i]++;
+  });
+  return nucleotideHistogram;
 };
 
 module.exports = function StrandFactory (dnaStrand) {
