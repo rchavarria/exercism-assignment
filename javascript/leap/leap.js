@@ -4,6 +4,10 @@ function isDivisibleBy(n, divisor) {
 }
 
 module.exports = function isLeap(year) {
+  if (isDivisibleBy(year, 400)) {
+    return true;
+  }
+
   if (isDivisibleBy(year, 100)) {
     return false;
   }
