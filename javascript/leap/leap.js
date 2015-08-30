@@ -1,16 +1,8 @@
 
-function isDivisibleBy(n, divisor) {
-  return (n % divisor) === 0;
-}
-
 module.exports = function isLeap(year) {
-  if (isDivisibleBy(year, 400)) {
-    return true;
-  }
+  var divisibleBy4 = year % 4 === 0,
+    notDivisibleBy100 = year % 100 !== 0,
+    divisibleBy400 = year % 400 === 0;
 
-  if (isDivisibleBy(year, 100)) {
-    return false;
-  }
-
-  return isDivisibleBy(year, 4);
+  return divisibleBy4 && (notDivisibleBy100 || divisibleBy400);
 }
