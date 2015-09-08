@@ -13,7 +13,7 @@ describe("toRna()", function() {
     expect(toRna('A')).toEqual('U');
   });
 
-  xit("transcribes thymine to adenine", function() {
+  it("transcribes thymine to adenine", function() {
     expect(toRna('T')).toEqual('A');
   });
 
