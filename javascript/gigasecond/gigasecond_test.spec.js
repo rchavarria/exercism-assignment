@@ -8,7 +8,7 @@ describe("Gigasecond", function() {
     expect(gs.date()).toEqual(expectedDate);
   });
 
-  xit("test 2", function() {
+  it("test 2", function() {
     var gs = new Gigasecond(new Date(1977, 5, 13));
     var expectedDate = new Date(2009, 1, 19);
     expect(gs.date()).toEqual(expectedDate);
