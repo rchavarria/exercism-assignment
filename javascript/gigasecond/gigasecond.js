@@ -1,24 +1,24 @@
 
 var GIGASECONDS_IN_MILIS = 1e9 * 1e3;
 
-module.exports = function (birthdate) {
-  this.birthdate = birthdate;
+function resetAllButDate(date) {
+  date.setHours(0);
+  date.setMinutes(0);
+  date.setSeconds(0);
+  date.setMilliseconds(0);
 
-  this.date = function () {
-    var gigasecondBirth = new Date();
-    this.birthdate.setHours(0);
-    this.birthdate.setMinutes(0);
-    this.birthdate.setSeconds(0);
-    this.birthdate.setMilliseconds(0);
-
-    gigasecondBirth.setTime(this.birthdate.getTime() + GIGASECONDS_IN_MILIS);
-    gigasecondBirth.setHours(0);
-    gigasecondBirth.setMinutes(0);
-    gigasecondBirth.setSeconds(0);
-    gigasecondBirth.setMilliseconds(0);
-
-    return gigasecondBirth;
-  };
-
+  return date;
 }
+
+function Gigasecond (birthday) {
+  this.birthday = resetAllButDate(birthday);
+}
+
+Gigasecond.prototype.date = function () {
+  var aGigasecondLater = new Date();
+  aGigasecondLater.setTime(this.birthday.getTime() + GIGASECONDS_IN_MILIS);
+  return resetAllButDate(aGigasecondLater);
+}
+
+module.exports = Gigasecond;
 
