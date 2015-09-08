@@ -1,18 +1,13 @@
 
 function transcribe(nucleotide) {
-  if (nucleotide === 'C') {
-    return 'G';
+  var transcriptions = {
+    'C': 'G',
+    'G': 'C',
+    'A': 'U',
+    'T': 'A'
   }
 
-  if (nucleotide === 'G') {
-    return 'C';
-  }
-
-  if (nucleotide === 'A') {
-    return 'U';
-  }
-
-  return 'A';
+  return transcriptions[nucleotide];
 }
 
 module.exports = function toRna(strand) {
