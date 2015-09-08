@@ -1,3 +1,12 @@
+
+function transcribe(nucleotide) {
+  if (nucleotide === 'C') {
+    return 'G';
+  }
+
+  return 'C';
+}
+
 module.exports = function toRna(strand) {
-  return strand.replace('C', 'G');
+  return strand.split('').map(transcribe).join('');
 }

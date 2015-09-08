@@ -5,7 +5,7 @@ describe("toRna()", function() {
     expect(toRna('C')).toEqual('G');
   });
 
-  xit("transcribes guanine to cytosine", function() {
+  it("transcribes guanine to cytosine", function() {
     expect(toRna('G')).toEqual('C');
   });
 
