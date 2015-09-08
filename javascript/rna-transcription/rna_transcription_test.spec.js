@@ -9,7 +9,7 @@ describe("toRna()", function() {
     expect(toRna('G')).toEqual('C');
   });
 
-  xit("transcribes adenine to uracil", function() {
+  it("transcribes adenine to uracil", function() {
     expect(toRna('A')).toEqual('U');
   });
 

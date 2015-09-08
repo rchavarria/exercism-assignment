@@ -4,7 +4,11 @@ function transcribe(nucleotide) {
     return 'G';
   }
 
-  return 'C';
+  if (nucleotide === 'G') {
+    return 'C';
+  }
+
+  return 'U';
 }
 
 module.exports = function toRna(strand) {
