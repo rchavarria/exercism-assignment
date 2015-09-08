@@ -17,7 +17,7 @@ describe("toRna()", function() {
     expect(toRna('T')).toEqual('A');
   });
 
-  xit("transcribes all dna nucleotides to their rna complements", function() {
+  it("transcribes all dna nucleotides to their rna complements", function() {
     expect(toRna('ACGTGGTCTTAA'))
         .toEqual('UGCACCAGAAUU');
   });
