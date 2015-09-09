@@ -1,11 +1,18 @@
 
+var INVALID_NUMBER = '0000000000';
+
 function validate (number) {
   var validNumber = number.replace(/[\(\)\s-\.]/g, '');
-  if (validNumber.length > 10) {
-    return validNumber.substring(1);
+
+  if (validNumber.length === 10) {
+    return validNumber;
   }
 
-  return validNumber;
+  if (validNumber[0] !== '1') {
+    return INVALID_NUMBER;
+  }
+
+  return validNumber.substring(1);
 }
 
 function PhoneNumber (number) {
