@@ -1,6 +1,6 @@
 
 function validate (number) {
-  return number.replace(/[\(\)\s-]/g, '');
+  return number.replace(/[\(\)\s-\.]/g, '');
 }
 
 function PhoneNumber (number) {

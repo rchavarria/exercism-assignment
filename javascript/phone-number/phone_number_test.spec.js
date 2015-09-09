@@ -6,7 +6,7 @@ describe("PhoneNumber()", function() {
     expect(phone.number()).toEqual("1234567890");
   });
 
-  xit("cleans numbers with dots", function() {
+  it("cleans numbers with dots", function() {
     var phone = new PhoneNumber("123.456.7890");
     expect(phone.number()).toEqual("1234567890");
   });
