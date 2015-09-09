@@ -8,6 +8,10 @@ function validate (number) {
     return validNumber;
   }
 
+  if (validNumber.length < 10) {
+    return INVALID_NUMBER;
+  }
+
   if (validNumber[0] !== '1') {
     return INVALID_NUMBER;
   }

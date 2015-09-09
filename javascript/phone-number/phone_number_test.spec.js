@@ -21,7 +21,7 @@ describe("PhoneNumber()", function() {
     expect(phone.number()).toEqual("0000000000");
   });
 
-  xit("invalid when 9 digits", function() {
+  it("invalid when 9 digits", function() {
     var phone = new PhoneNumber("123456789");
     expect(phone.number()).toEqual("0000000000");
   });
