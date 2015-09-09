@@ -1,6 +1,11 @@
 
 function validate (number) {
-  return number.replace(/[\(\)\s-\.]/g, '');
+  var validNumber = number.replace(/[\(\)\s-\.]/g, '');
+  if (validNumber.length > 10) {
+    return validNumber.substring(1);
+  }
+
+  return validNumber;
 }
 
 function PhoneNumber (number) {

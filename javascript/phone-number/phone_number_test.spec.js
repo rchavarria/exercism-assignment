@@ -11,7 +11,7 @@ describe("PhoneNumber()", function() {
     expect(phone.number()).toEqual("1234567890");
   });
 
-  xit("valid when 11 digits and first digit is 1", function() {
+  it("valid when 11 digits and first digit is 1", function() {
     var phone = new PhoneNumber("11234567890");
     expect(phone.number()).toEqual("1234567890");
   });
