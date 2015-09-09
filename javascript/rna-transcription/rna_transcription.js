@@ -1,15 +1,14 @@
 
-function transcribe(nucleotide) {
-  var transcriptions = {
-    'C': 'G',
-    'G': 'C',
-    'A': 'U',
-    'T': 'A'
-  }
-
-  return transcriptions[nucleotide];
+var TRANSCRIPTIONS = {
+  C: 'G',
+  G: 'C',
+  A: 'U',
+  T: 'A'
 }
 
-module.exports = function toRna(strand) {
-  return strand.split('').map(transcribe).join('');
+module.exports = function toRna(dna) {
+  return dna.replace(/[CGAT]/g, function (nucleotide) {
+    return TRANSCRIPTIONS[nucleotide];
+  });
 }
+
