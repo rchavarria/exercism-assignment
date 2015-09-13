@@ -40,7 +40,7 @@ describe("School", function() {
     expect(school.grade(5)).toEqual(expectedStudents);
   });
 
-  xit("grade returns an empty array if there are no students in that grade", function() {
+  it("grade returns an empty array if there are no students in that grade", function() {
     expect(school.grade(1)).toEqual([]);
   });
 

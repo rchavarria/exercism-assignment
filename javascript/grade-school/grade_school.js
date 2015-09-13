@@ -14,7 +14,13 @@ School.prototype.add = function (name, grade) {
 }
 
 School.prototype.grade = function (grade) {
-  return roster[grade].sort();
+  var enrolled = roster[grade];
+
+  if (!enrolled) {
+    return [];
+  }
+
+  return enrolled.sort();
 }
 
 module.exports = School;
