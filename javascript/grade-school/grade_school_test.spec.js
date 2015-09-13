@@ -32,7 +32,7 @@ describe("School", function() {
     expect(school.roster()).toEqual(expectedDb);
   });
 
-  xit("grade returns the students in that grade in alphabetical order", function() {
+  it("grade returns the students in that grade in alphabetical order", function() {
     school.add("Franklin",5);
     school.add("Bradley",5);
     school.add("Jeff",1);
