@@ -9,8 +9,9 @@ School.prototype.roster = function() {
 }
 
 School.prototype.add = function (name, grade) {
-  roster[grade] = roster[grade] || [];
-  roster[grade].push(name);
+  var enrolled = this.grade(grade);
+  enrolled.push(name);
+  roster[grade] = enrolled.sort();
 }
 
 School.prototype.grade = function (grade) {
