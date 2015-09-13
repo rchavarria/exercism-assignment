@@ -15,8 +15,7 @@ School.prototype.add = function (name, grade) {
 }
 
 School.prototype.grade = function (grade) {
-  var enrolled = roster[grade] || [];
-  return enrolled.sort();
+  return roster[grade] || [];
 }
 
 module.exports = School;
