@@ -1,6 +1,7 @@
-var roster = {};
+var roster;
 
 function School() {
+  roster = {};
 }
 
 School.prototype.roster = function() {
@@ -8,7 +9,7 @@ School.prototype.roster = function() {
 }
 
 School.prototype.add = function (name, grade) {
-  roster[grade] = [];
+  roster[grade] = roster[grade] || [];
   roster[grade].push(name);
 }
 
