@@ -1,23 +1,14 @@
-
-var GIGASECONDS_IN_MILIS = 1e9 * 1e3;
-
-function resetAllButDate(date) {
-  date.setHours(0);
-  date.setMinutes(0);
-  date.setSeconds(0);
-  date.setMilliseconds(0);
-
-  return date;
-}
+var GIGAMILLISECONDS = 1e9 * 1e3;
 
 function Gigasecond (birthday) {
-  this.birthday = resetAllButDate(birthday);
+  this.birthday = birthday;
 }
 
 Gigasecond.prototype.date = function () {
-  var aGigasecondLater = new Date();
-  aGigasecondLater.setTime(this.birthday.getTime() + GIGASECONDS_IN_MILIS);
-  return resetAllButDate(aGigasecondLater);
+  var afterAGigamillisecond = this.birthday.getTime() + GIGAMILLISECONDS,
+    afterAGigasecondDate = new Date(afterAGigamillisecond);
+
+  return new Date(afterAGigasecondDate.toDateString());
 }
 
 module.exports = Gigasecond;
