@@ -1,9 +1,9 @@
-
-var INVALID_NUMBER = '0000000000';
+var INVALID_NUMBER = '0000000000',
+  NUMBER_FORMAT = '($1) $2-$3',
+  NUMBER_GROUPS_REGEXP = /([\d]{3})([\d]{3})([\d]{4})/;
 
 function validate (number) {
-  var validNumber = number.replace(/[\(\)\s-\.]/g, '');
-
+  var validNumber = number.replace(/[\D]/g, '');
   if (validNumber.length === 10) {
     return validNumber;
   }
@@ -12,19 +12,11 @@ function validate (number) {
     return INVALID_NUMBER;
   }
 
-  if (validNumber[0] !== '1') {
+  if (!validNumber.match(/^1/)) {
     return INVALID_NUMBER;
   }
 
   return validNumber.substring(1);
-}
-
-function middleCode(number) {
-  return number.substring(3, 6);
-}
-
-function endCode(number) {
-  return number.substring(6);
 }
 
 function PhoneNumber (number) {
@@ -40,15 +32,7 @@ PhoneNumber.prototype.areaCode = function () {
 }
 
 PhoneNumber.prototype.toString = function () {
-  return [
-      '(',
-      this.areaCode(),
-      ')',
-      ' ',
-      middleCode(this.phoneNumber),
-      '-',
-      endCode(this.phoneNumber)
-    ].join('');
+  return this.phoneNumber.replace(NUMBER_GROUPS_REGEXP, NUMBER_FORMAT);
 }
 
 module.exports = PhoneNumber;
