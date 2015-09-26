@@ -15,11 +15,11 @@ describe('Robot', function() {
     expect(robot.name).toMatch(/^[A-Z]{2}\d{3}$/);
   });
 
-  xit('name is the same each time', function() {
+  it('name is the same each time', function() {
     expect(robot.name).toEqual(robot.name);
   });
 
-  xit('different robots have different names', function() {
+  it('different robots have different names', function() {
     var i,
         numRobots = 10000,
         usedNames = {};
@@ -32,7 +32,7 @@ describe('Robot', function() {
     expect(Object.keys(usedNames).length).toEqual(10000);
   });
 
-  xit('is able to reset the name', function() {
+  it('is able to reset the name', function() {
     var originalName = robot.name;
     robot.reset();
     var newName = robot.name;
