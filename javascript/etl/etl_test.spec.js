@@ -9,7 +9,7 @@ describe('Transform', function() {
     expect(transform(old)).toEqual(expected);
   });
 
-  xit('transforms more values', function() {
+  it('transforms more values', function() {
     var old = { 1: ['A', 'E', 'I', 'O', 'U'] };
     var expected = { a: 1, e: 1, i: 1, o: 1, u: 1 };
 
