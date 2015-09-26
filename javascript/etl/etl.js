@@ -1,4 +1,4 @@
-var AVAILABLE_POINTS = [ '1', '2' ];
+var AVAILABLE_POINTS = [ '1', '2', '3', '4', '5', '8', '10' ];
 
 function transform(old) {
   var newStructure = {};

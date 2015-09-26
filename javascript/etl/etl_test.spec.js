@@ -23,7 +23,7 @@ describe('Transform', function() {
     expect(transform(old)).toEqual(expected);
   });
 
-  xit('transforms a full dataset', function() {
+  it('transforms a full dataset', function() {
     var old = {
       1: [ 'A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T' ],
       2: [ 'D', 'G' ],
