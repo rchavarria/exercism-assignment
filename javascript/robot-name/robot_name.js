@@ -11,7 +11,12 @@ function generateName() {
   name += ALPHABET[alphaTenthIndex];
   name += ALPHABET[alphaUnitIndex];
   name += ('000' + numberIndex).slice(-3);
+  increaseIndexes();
 
+  return name;
+}
+
+function increaseIndexes() {
   numberIndex++;
   if (numberIndex >= MAX_NUMBER_INDEX) {
     numberIndex %= MAX_NUMBER_INDEX;
@@ -23,8 +28,6 @@ function generateName() {
       alphaTenthIndex %= ALPHABET_LENGTH;
     }
   }
-
-  return name;
 }
 
 function Robot() {
