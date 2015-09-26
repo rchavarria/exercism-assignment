@@ -1,9 +1,14 @@
 var ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-  ALPHABET_LENGTH = ALPHABET.length,
+  MAX_ALPHA_INDEX = ALPHABET.length,
   MAX_NUMBER_INDEX = 1000,
-  numberIndex = 0,
+  numberIndex = -1, // allows to increase indexes before generating first name
   alphaUnitIndex = 0,
   alphaTenthIndex = 0;
+
+function nextRobotName() {
+  increaseIndexes();
+  return generateName();
+}
 
 function generateName() {
   var name = '';
@@ -11,7 +16,6 @@ function generateName() {
   name += ALPHABET[alphaTenthIndex];
   name += ALPHABET[alphaUnitIndex];
   name += ('000' + numberIndex).slice(-3);
-  increaseIndexes();
 
   return name;
 }
@@ -22,20 +26,20 @@ function increaseIndexes() {
     numberIndex %= MAX_NUMBER_INDEX;
     alphaUnitIndex++;
 
-    if (alphaUnitIndex >= ALPHABET_LENGTH) {
-      alphaUnitIndex %= ALPHABET_LENGTH;
+    if (alphaUnitIndex >= MAX_ALPHA_INDEX) {
+      alphaUnitIndex %= MAX_ALPHA_INDEX;
       alphaTenthIndex++;
-      alphaTenthIndex %= ALPHABET_LENGTH;
+      alphaTenthIndex %= MAX_ALPHA_INDEX;
     }
   }
 }
 
 function Robot() {
-  this.name = generateName();
+  this.name = nextRobotName();
 }
 
 Robot.prototype.reset = function() {
-  this.name = generateName();
+  this.name = nextRobotName();
 }
 
 module.exports = Robot;
