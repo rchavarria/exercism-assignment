@@ -21,7 +21,7 @@ describe('Robot', function() {
 
   it('different robots have different names', function() {
     var i,
-        numRobots = 10000,
+        numRobots = 10000;
         usedNames = {};
 
     for (i = 0; i < numRobots; i++) {
@@ -29,7 +29,7 @@ describe('Robot', function() {
       usedNames[newRobot.name] = true;
     }
 
-    expect(Object.keys(usedNames).length).toEqual(10000);
+    expect(Object.keys(usedNames).length).toEqual(numRobots);
   });
 
   it('is able to reset the name', function() {
@@ -40,7 +40,7 @@ describe('Robot', function() {
     expect(originalName).not.toEqual(newName);
   });
 
-  xit('should set a unique name after reset', function() {
+  it('should set a unique name after reset', function() {
     var i,
         numResets = 10000,
         usedNames = {};
@@ -54,4 +54,18 @@ describe('Robot', function() {
 
     expect(Object.keys(usedNames).length).toEqual(10001);
   });
+
+  it('different robots have different names', function() {
+    var i,
+        maxRobotNamesPossible = 26 * 26 * 1000,
+        usedNames = {};
+
+    for (i = 0; i < maxRobotNamesPossible; i++) {
+      var newRobot = new Robot();
+      usedNames[newRobot.name] = true;
+    }
+
+    expect(Object.keys(usedNames).length).toEqual(maxRobotNamesPossible);
+  });
+
 });

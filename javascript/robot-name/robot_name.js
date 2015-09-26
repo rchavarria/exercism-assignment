@@ -1,5 +1,7 @@
 var ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-  index = 0,
+  ALPHABET_LENGTH = ALPHABET.length,
+  MAX_NUMBER_INDEX = 1000,
+  numberIndex = 0,
   alphaUnitIndex = 0,
   alphaTenthIndex = 0;
 
@@ -8,13 +10,18 @@ function generateName() {
 
   name += ALPHABET[alphaTenthIndex];
   name += ALPHABET[alphaUnitIndex];
-  name += ('000' + index).slice(-3);
+  name += ('000' + numberIndex).slice(-3);
 
-  index++;
-  alphaUnitIndex = alphaUnitIndex + 1;
-  if (alphaUnitIndex > ALPHABET.length) {
-    alphaUnitIndex = alphaUnitIndex % ALPHABET.length;
-    alphaTenthIndex = (alphaTenthIndex + 1) % ALPHABET.length;
+  numberIndex++;
+  if (numberIndex >= MAX_NUMBER_INDEX) {
+    numberIndex %= MAX_NUMBER_INDEX;
+    alphaUnitIndex++;
+
+    if (alphaUnitIndex >= ALPHABET_LENGTH) {
+      alphaUnitIndex %= ALPHABET_LENGTH;
+      alphaTenthIndex++;
+      alphaTenthIndex %= ALPHABET_LENGTH;
+    }
   }
 
   return name;
