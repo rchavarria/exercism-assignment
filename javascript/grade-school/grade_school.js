@@ -5,7 +5,7 @@ function School() {
 }
 
 School.prototype.roster = function() {
-  return roster;
+  return JSON.parse(JSON.stringify(roster));
 }
 
 School.prototype.add = function (name, grade) {
@@ -15,7 +15,7 @@ School.prototype.add = function (name, grade) {
 }
 
 School.prototype.grade = function (grade) {
-  return roster[grade] || [];
+  return JSON.parse(JSON.stringify(roster[grade] || []));
 }
 
 module.exports = School;
