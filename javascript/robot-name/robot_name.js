@@ -24,4 +24,8 @@ function Robot() {
   this.name = generateName();
 }
 
+Robot.prototype.reset = function() {
+  this.name = generateName();
+}
+
 module.exports = Robot;
