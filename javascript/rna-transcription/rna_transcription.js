@@ -6,9 +6,11 @@ var TRANSCRIPTIONS = {
   T: 'A'
 }
 
+function withTheirTranscriptions(nucleotide) {
+  return TRANSCRIPTIONS[nucleotide];
+}
+
 module.exports = function toRna(dna) {
-  return dna.replace(/[CGAT]/g, function (nucleotide) {
-    return TRANSCRIPTIONS[nucleotide];
-  });
+  return dna.replace(/[CGAT]/g, withTheirTranscriptions);
 }
 
