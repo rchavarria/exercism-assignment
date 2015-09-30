@@ -1,45 +1,45 @@
-var ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-  MAX_ALPHA_INDEX = ALPHABET.length,
-  MAX_NUMBER_INDEX = 1000,
-  numberIndex = -1, // allows to increase indexes before generating first name
-  alphaUnitIndex = 0,
-  alphaTenthIndex = 0;
+var HOW_MANY_CHARS = 26,
+  HOW_MANY_NUMBERS = 1000,
+  CHAR_CODE_A = 'A'.charCodeAt(0),
+  generatedNames = {};
 
-function nextRobotName() {
-  increaseIndexes();
-  return generateName();
+function Robot() {
+  this.name = generateName();
+}
+
+Robot.prototype.reset = function() {
+  this.name = generateName();
 }
 
 function generateName() {
   var name = '';
+  name += generateRandomChar();
+  name += generateRandomChar();
+  name += pad(generateRandomNumber());
 
-  name += ALPHABET[alphaTenthIndex];
-  name += ALPHABET[alphaUnitIndex];
-  name += ('000' + numberIndex).slice(-3);
-
-  return name;
+  return getNotGeneratedName(name);
 }
 
-function increaseIndexes() {
-  numberIndex++;
-  if (numberIndex >= MAX_NUMBER_INDEX) {
-    numberIndex %= MAX_NUMBER_INDEX;
-    alphaUnitIndex++;
+function generateRandomChar() {
+  var random = Math.floor(Math.random() * HOW_MANY_CHARS);
+  return String.fromCharCode(CHAR_CODE_A + random);
+}
 
-    if (alphaUnitIndex >= MAX_ALPHA_INDEX) {
-      alphaUnitIndex %= MAX_ALPHA_INDEX;
-      alphaTenthIndex++;
-      alphaTenthIndex %= MAX_ALPHA_INDEX;
-    }
+function pad(number) {
+  return ('000' + number).slice(-3);
+}
+
+function generateRandomNumber() {
+  return Math.floor(Math.random() * HOW_MANY_NUMBERS);
+}
+
+function getNotGeneratedName(name) {
+  if (generatedNames[name]) {
+    return generateName();
   }
-}
 
-function Robot() {
-  this.name = nextRobotName();
-}
-
-Robot.prototype.reset = function() {
-  this.name = nextRobotName();
+  generatedNames[name] = true;
+  return name;
 }
 
 module.exports = Robot;

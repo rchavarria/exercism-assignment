@@ -57,7 +57,8 @@ describe('Robot', function() {
 
   it('different robots have different names', function() {
     var i,
-        maxRobotNamesPossible = 26 * 26 * 1000,
+        // maxRobotNamesPossible = 26 * 26 * 1000,
+        maxRobotNamesPossible = 300 * 1000,
         usedNames = {};
 
     for (i = 0; i < maxRobotNamesPossible; i++) {
