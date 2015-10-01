@@ -11,7 +11,7 @@ describe('Space Age', function() {
     expect(age.onEarth()).toEqual(31.69);
   });
 
-  xit('age in mercury years', function() {
+  it('age in mercury years', function() {
     var age = new SpaceAge(2134835688);
     expect(age.onEarth()).toEqual(67.65);
     expect(age.onMercury()).toEqual(280.88);
