@@ -1,20 +1,15 @@
-var AVAILABLE_POINTS = [ 1, 2, 3, 4, 5, 8, 10 ];
+function transform(dataset) {
+  var keys = Object.keys(dataset);
 
-function transform(oldStructure) {
-  var newStructure = {};
+  return keys.reduce(function (transformed, key) {
+    var point = +key;
 
-  AVAILABLE_POINTS.forEach(function (point) {
-    var characters = oldStructure[point];
-    if (!characters) {
-      return;
-    }
-
-    characters.forEach(function (c) {
-      newStructure[c.toLowerCase()] = point;
+    dataset[point].forEach(function (c) {
+      transformed[c.toLowerCase()] = point;
     });
-  });
 
-  return newStructure;
+    return transformed;
+  }, {});
 }
 
 module.exports = transform;
