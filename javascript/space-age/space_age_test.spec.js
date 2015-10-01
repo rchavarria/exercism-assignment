@@ -6,7 +6,7 @@ describe('Space Age', function() {
     expect(age.seconds).toEqual(1000000);
   });
 
-  xit('age in earth years', function() {
+  it('age in earth years', function() {
     var age = new SpaceAge(1000000000);
     expect(age.onEarth()).toEqual(31.69);
   });
