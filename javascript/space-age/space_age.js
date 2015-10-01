@@ -1,10 +1,13 @@
 var SECONDS_IN_AN_EARTH_DAY = 24 * 60 * 60,
-  SECONDS_IN_AN_EARTH_YEAR = 365.25 * SECONDS_IN_AN_EARTH_DAY,
-  SECONDS_IN_A_MERCURY_YEAR = 87.97 * SECONDS_IN_AN_EARTH_DAY,
-  SECONDS_IN_A_VENUS_YEAR = 224.7 * SECONDS_IN_AN_EARTH_DAY;
+  EARTH_DAYS_IN_A_YEAR = {
+    'Mercury': 87.97,
+    'Earth': 365.25,
+    'Venus': 224.7
+  };
 
-function toFixed(number, decimals) {
-  return +number.toFixed(decimals);
+function ageOn(planet, seconds) {
+  var age = seconds / (EARTH_DAYS_IN_A_YEAR[planet] * SECONDS_IN_AN_EARTH_DAY);
+  return +age.toFixed(2);
 }
 
 function SpaceAge(seconds) {
@@ -12,15 +15,15 @@ function SpaceAge(seconds) {
 }
 
 SpaceAge.prototype.onEarth = function () {
-  return toFixed(this.seconds / SECONDS_IN_AN_EARTH_YEAR, 2);
+  return ageOn('Earth', this.seconds);
 }
 
 SpaceAge.prototype.onMercury = function () {
-  return toFixed(this.seconds / SECONDS_IN_A_MERCURY_YEAR, 2);
+  return ageOn('Mercury', this.seconds);
 }
 
 SpaceAge.prototype.onVenus = function () {
-  return toFixed(this.seconds / SECONDS_IN_A_VENUS_YEAR, 2);
+  return ageOn('Venus', this.seconds);
 }
 
 module.exports = SpaceAge;
