@@ -37,7 +37,7 @@ describe('Grains', function () {
     expect(grains.square(1)).toBe('1');
   });
 
-  xit('square 2', function () {
+  it('square 2', function () {
     expect(grains.square(2)).toBe('2');
   });
 

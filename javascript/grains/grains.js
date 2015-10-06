@@ -2,7 +2,7 @@ function Grains() {
 }
 
 Grains.prototype.square = function (n) {
-  return '1';
+  return n.toString();
 }
 
 module.exports = Grains;
