@@ -61,7 +61,7 @@ describe('Grains', function () {
     expect(grains.square(64)).toBe('9223372036854775808');
   });
 
-  xit('total', function () {
+  it('total', function () {
     expect(grains.total()).toBe('18446744073709551615');
   });
 });
