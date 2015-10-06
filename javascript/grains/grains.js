@@ -8,14 +8,10 @@ Grains.prototype.square = function (n) {
 }
 
 Grains.prototype.total = function () {
-  var i = 1,
-    square,
-    sum = new BigInt(0);
+  var i, sum = new BigInt(0);
 
-  while (i <= 64) {
-    square = this.square(i);
-    sum = sum.add(square);
-    i++;
+  for (i = 1; i <= 64; i++) {
+    sum = sum.add(this.square(i));
   }
 
   return sum.toString();
