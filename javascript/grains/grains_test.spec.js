@@ -57,7 +57,7 @@ describe('Grains', function () {
     expect(grains.square(32)).toBe('2147483648');
   });
 
-  xit('square 64', function () {
+  it('square 64', function () {
     expect(grains.square(64)).toBe('9223372036854775808');
   });
 
