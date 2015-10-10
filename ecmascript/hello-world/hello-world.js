@@ -5,9 +5,8 @@
 
 class HelloWorld {
   hello(name) {
-    //
-    // YOUR CODE GOES HERE
-    //
+    name = name || 'world';
+    return `Hello, ${name}!`;
   }
 }
 
