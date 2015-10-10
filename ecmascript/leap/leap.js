@@ -3,14 +3,8 @@ function divisibleBy(year, n) {
 }
 
 export default function isLeapYear(year) {
-  if (divisibleBy(year, 400)) {
-    return true;
-  }
-
-  if (divisibleBy(year, 100)) {
-    return false;
-  }
-
-  return divisibleBy(year, 4);
+  return divisibleBy(year, 400) ||
+    !divisibleBy(year, 100) &&
+    divisibleBy(year, 4);
 }
 
