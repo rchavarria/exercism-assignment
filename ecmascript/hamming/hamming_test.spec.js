@@ -11,7 +11,7 @@ describe('Hamming', () => {
     expect(hamming.compute('A','G')).toEqual(1);
   });
 
-  xit('complete hamming distance for small strand', () => {
+  it('complete hamming distance for small strand', () => {
     expect(hamming.compute('AG','CT')).toEqual(2);
   });
 

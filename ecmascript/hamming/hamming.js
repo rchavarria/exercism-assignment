@@ -4,7 +4,7 @@ export default class Hamming {
       return 0;
     }
 
-    return 1;
+    return strand1.length;
   }
 }
 
