@@ -7,7 +7,7 @@ describe('Hamming', () => {
     expect(hamming.compute('A', 'A')).toEqual(0);
   });
 
-  xit('complete hamming distance for single nucleotide strand', () => {
+  it('complete hamming distance for single nucleotide strand', () => {
     expect(hamming.compute('A','G')).toEqual(1);
   });
 
