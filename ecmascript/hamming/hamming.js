@@ -1,10 +1,16 @@
 export default class Hamming {
   compute(strand1, strand2) {
-    if (strand1 === strand2) {
-      return 0;
+    let difference = 0;
+
+    for (let i = 0; i < strand1.length; i++) {
+      if (strand1.charAt(i) === strand2.charAt(i)) {
+        continue;
+      }
+
+      difference++;
     }
 
-    return strand1.length;
+    return difference;
   }
 }
 
