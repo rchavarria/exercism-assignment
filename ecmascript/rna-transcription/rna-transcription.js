@@ -1,11 +1,13 @@
+const TRANSCRIPTION_TABLE = new Map()
+  .set('C', 'G')
+  .set('G', 'C')
+  .set('A', 'U')
+  .set('T', 'A');
+
 export default class Transcriptor {
 
   toRna(strand) {
-    if (strand === 'C') {
-      return 'G';
-    }
-
-    return 'C';
+    return TRANSCRIPTION_TABLE.get(strand);
   }
 
 }
