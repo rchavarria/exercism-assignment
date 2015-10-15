@@ -7,7 +7,10 @@ const TRANSCRIPTION_TABLE = new Map()
 export default class Transcriptor {
 
   toRna(strand) {
-    return TRANSCRIPTION_TABLE.get(strand);
+    return strand
+      .split('')
+      .map((s) => TRANSCRIPTION_TABLE.get(s))
+      .join('');
   }
 
 }
