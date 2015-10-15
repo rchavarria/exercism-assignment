@@ -1,7 +1,11 @@
 export default class Transcriptor {
 
   toRna(strand) {
-    return 'G';
+    if (strand === 'C') {
+      return 'G';
+    }
+
+    return 'C';
   }
 
 }
