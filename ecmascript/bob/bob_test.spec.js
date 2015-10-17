@@ -14,7 +14,7 @@ describe('Bob', () => {
     expect(result).toEqual('Whoa, chill out!');
   });
 
-  xit('asking a question', () => {
+  it('asking a question', () => {
     var result = bob.hey('Does this cryogenic chamber make me look fat?');
     expect(result).toEqual('Sure.');
   });
