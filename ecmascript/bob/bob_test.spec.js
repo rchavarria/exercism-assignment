@@ -19,22 +19,22 @@ describe('Bob', () => {
     expect(result).toEqual('Sure.');
   });
 
-  xit('talking forcefully', () => {
+  it('talking forcefully', () => {
     var result = bob.hey("Let's go make out behind the gym!");
     expect(result).toEqual('Whatever.');
   });
 
-  xit('using acronyms in regular speech', () => {
+  it('using acronyms in regular speech', () => {
     var result = bob.hey("It's OK if you don't want to go to the DMV.");
     expect(result).toEqual('Whatever.');
   });
 
-  xit('forceful questions', () => {
+  it('forceful questions', () => {
     var result = bob.hey('WHAT THE HELL WERE YOU THINKING?');
     expect(result).toEqual('Whoa, chill out!');
   });
 
-  xit('shouting numbers', () => {
+  it('shouting numbers', () => {
     var result = bob.hey('1, 2, 3 GO!');
     expect(result).toEqual('Whoa, chill out!');
   });
