@@ -1,14 +1,18 @@
+let isSilent = (m) => m.trim().length === 0;
+let isShouting = (m) => m.toUpperCase() === m && m.match(/[A-Z]/);
+let isAsking = (m) => m.endsWith('?');
+
 class Bob {
   hey(message) {
-    if (message.trim().length === 0) {
+    if (isSilent(message)) {
       return 'Fine. Be that way!';
     }
 
-    if (message.toUpperCase() === message && message.match(/[A-Z]/)) {
+    if (isShouting(message)) {
       return 'Whoa, chill out!';
     }
 
-    if (message.endsWith('?')) {
+    if (isAsking(message)) {
       return 'Sure.';
     }
 
