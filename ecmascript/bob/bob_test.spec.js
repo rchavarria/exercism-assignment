@@ -9,7 +9,7 @@ describe('Bob', () => {
     expect(result).toEqual('Whatever.');
   });
 
-  xit('shouting', () => {
+  it('shouting', () => {
     var result = bob.hey('WATCH OUT!');
     expect(result).toEqual('Whoa, chill out!');
   });
