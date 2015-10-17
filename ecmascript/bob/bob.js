@@ -1,6 +1,6 @@
 class Bob {
   hey(message) {
-    if (message.toUpperCase() === message) {
+    if (message.toUpperCase() === message && message.match(/[A-Z]/)) {
       return 'Whoa, chill out!';
     }
 

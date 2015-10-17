@@ -39,42 +39,42 @@ describe('Bob', () => {
     expect(result).toEqual('Whoa, chill out!');
   });
 
-  xit('only numbers', () => {
+  it('only numbers', () => {
     var result = bob.hey('1, 2, 3');
     expect(result).toEqual('Whatever.');
   });
 
-  xit('question with only numbers', () => {
+  it('question with only numbers', () => {
     var result = bob.hey('4?');
     expect(result).toEqual('Sure.');
   });
 
-  xit('shouting with special characters', () => {
+  it('shouting with special characters', () => {
     var result = bob.hey('ZOMG THE %^*@#$(*^ ZOMBIES ARE COMING!!11!!1!');
     expect(result).toEqual('Whoa, chill out!');
   });
 
-  xit('shouting with umlauts', () => {
+  it('shouting with umlauts', () => {
     var result = bob.hey('\xdcML\xc4\xdcTS!');
     expect(result).toEqual('Whoa, chill out!');
   });
 
-  xit('calmly speaking about umlauts', () => {
+  it('calmly speaking about umlauts', () => {
     var result = bob.hey('\xfcML\xe4\xdcTS');
     expect(result).toEqual('Whatever.');
   });
 
-  xit('shouting with no exclamation mark', () => {
+  it('shouting with no exclamation mark', () => {
     var result = bob.hey('I HATE YOU');
     expect(result).toEqual('Whoa, chill out!');
   });
 
-  xit('statement containing question mark', () => {
+  it('statement containing question mark', () => {
     var result = bob.hey('Ending with a ? means a question.');
     expect(result).toEqual('Whatever.');
   });
 
-  xit('prattling on', () => {
+  it('prattling on', () => {
     var result = bob.hey('Wait! Hang on.  Are you going to be OK?');
     expect(result).toEqual('Sure.');
   });
