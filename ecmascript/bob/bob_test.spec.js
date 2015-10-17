@@ -79,12 +79,12 @@ describe('Bob', () => {
     expect(result).toEqual('Sure.');
   });
 
-  xit('silence', () => {
+  it('silence', () => {
     var result = bob.hey('');
     expect(result).toEqual('Fine. Be that way!');
   });
 
-   xit('prolonged silence', () => {
+   it('prolonged silence', () => {
     var result = bob.hey('   ');
     expect(result).toEqual('Fine. Be that way!');
   });
