@@ -1,31 +1,25 @@
-function sortStringChars(str) {
-  return str.split('').sort().join('');
-}
+let sortStringChars = (str) => str.split('').sort().join('');
 
-function Subject(anagram) {
-  this.anagram = anagram;
-  this.lcAnagram = anagram.toLowerCase();
-  this.sortedAnagram = sortStringChars(this.lcAnagram);
-}
-
-Subject.prototype.matches = function (candidates) {
-  var matches,
-    candidatesAsArray = candidates;
-
-  if (typeof candidates === 'string') {
-    candidatesAsArray = Array.prototype.slice.call(arguments);
+export default class Subject {
+  constructor(anagram) {
+    this.anagram = anagram;
+    this.lcAnagram = anagram.toLowerCase();
+    this.sortedAnagram = sortStringChars(this.lcAnagram);
   }
 
-  return candidatesAsArray.filter(this.isAnagram, this);
-};
+  matches(candidates) {
+    let candidatesAsArray = candidates;
+    if (typeof candidates === 'string') {
+      candidatesAsArray = Array.prototype.slice.call(arguments);
+    }
 
-Subject.prototype.isAnagram = function (candidate) {
-  var lcCandidate = candidate.toLowerCase();
-  return this.lcAnagram !== lcCandidate &&
-    this.sortedAnagram === sortStringChars(lcCandidate);
-}
+    return candidatesAsArray.filter(this.isAnagram, this);
+  }
 
-export default (anagram) => {
-  return new Subject(anagram);
+  isAnagram(candidate) {
+    let lcCandidate = candidate.toLowerCase();
+    return this.lcAnagram !== lcCandidate &&
+      this.sortedAnagram === sortStringChars(lcCandidate);
+  }
 }
 
