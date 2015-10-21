@@ -7,19 +7,14 @@ let takeOneDown = (n) => {
 }
 
 let end = (n) => {
-  var params = [ takeOneDown(n), bottlesOfBeer(n - 1) ];
-  return format('{0}, {1} of beer on the wall.', params);
+  return `${takeOneDown(n)}, ${bottlesOfBeer(n - 1)} of beer on the wall.`;
 }
 
 let capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
-let format = (message, params) => message
-    .replace(/\{0\}/g, params[0])
-    .replace(/\{1\}/g, params[1]);
-
 let pluralize = (n) => {
-  var suffix = (n === 1) ? '' : 's';
-  return 'bottle' + suffix;
+  let suffix = (n === 1) ? '' : 's';
+  return `bottle${suffix}`;
 }
 
 let bottles = (n) => {
@@ -30,11 +25,11 @@ let bottles = (n) => {
   }
 }
 
-let bottlesOfBeer = (n) => bottles(n) + ' ' + pluralize(n);
+let bottlesOfBeer = (n) => `${bottles(n)} ${pluralize(n)}`;
 
 let start = (n) => {
-  var params = [ bottlesOfBeer(n) ];
-  var result = format('{0} of beer on the wall, {0} of beer.', params);
+  let bottles = bottlesOfBeer(n);
+  let result = `${bottles} of beer on the wall, ${bottles} of beer.`;
   return capitalize(result);
 }
 
@@ -48,10 +43,10 @@ export default class BeerSong {
   }
 
   static sing(first, last) {
-    var i, verses = [];
+    let verses = [];
     last = last || 0;
 
-    for (i = first; i >= last; i--) {
+    for (let i = first; i >= last; i--) {
       verses.push(this.verse(i));
     }
 
