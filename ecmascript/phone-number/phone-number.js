@@ -1,6 +1,5 @@
 const INVALID_NUMBER = '0000000000';
-const NUMBER_FORMAT = '($1) $2-$3';
-const NUMBER_GROUPS_REGEXP = /([\d]{3})([\d]{3})([\d]{4})/;
+const NUMBER_GROUPS_REGEXP = /(\d{3})(\d{3})(\d{4})/;
 
 let validate = (number) => {
   let validNumber = number.replace(/[\D]/g, '');
@@ -20,7 +19,6 @@ let validate = (number) => {
 }
 
 export default class PhoneNumber {
-
   constructor(number) {
     this.phoneNumber = validate(number);
   }
@@ -34,7 +32,7 @@ export default class PhoneNumber {
   }
 
   toString() {
-    return this.phoneNumber.replace(NUMBER_GROUPS_REGEXP, NUMBER_FORMAT);
+    let codes = this.phoneNumber.match(NUMBER_GROUPS_REGEXP);
+    return `(${codes[1]}) ${codes[2]}-${codes[3]}`;
   }
-
 }
