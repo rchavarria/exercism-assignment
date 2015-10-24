@@ -2,20 +2,20 @@ const INVALID_NUMBER = '0000000000';
 const NUMBER_GROUPS_REGEXP = /(\d{3})(\d{3})(\d{4})/;
 
 let validate = (number) => {
-  let validNumber = number.replace(/[\D]/g, '');
-  if (validNumber.length === 10) {
-    return validNumber;
+  const candidate = number.replace(/[\D]/g, '');
+  if (candidate.length === 10) {
+    return candidate;
   }
 
-  if (validNumber.length < 10) {
+  if (candidate.length < 10) {
     return INVALID_NUMBER;
   }
 
-  if (!validNumber.match(/^1/)) {
+  if (!candidate.match(/^1/)) {
     return INVALID_NUMBER;
   }
 
-  return validNumber.substring(1);
+  return candidate.substring(1);
 }
 
 export default class PhoneNumber {
