@@ -1,4 +1,4 @@
-let sortStringChars = (str) => str.split('').sort().join('');
+const sortStringChars = (str) => str.split('').sort().join('');
 
 export default class Subject {
   constructor(anagram) {
@@ -7,17 +7,13 @@ export default class Subject {
     this.sortedAnagram = sortStringChars(this.lcAnagram);
   }
 
-  matches(candidates) {
-    let candidatesAsArray = candidates;
-    if (typeof candidates === 'string') {
-      candidatesAsArray = Array.prototype.slice.call(arguments);
-    }
-
-    return candidatesAsArray.filter(this.isAnagram, this);
+  matches(...args) {
+    const candidates = (typeof args[0] !== 'string') ? args[0] : args;
+    return candidates.filter(this.isAnagram, this);
   }
 
   isAnagram(candidate) {
-    let lcCandidate = candidate.toLowerCase();
+    const lcCandidate = candidate.toLowerCase();
     return this.lcAnagram !== lcCandidate &&
       this.sortedAnagram === sortStringChars(lcCandidate);
   }
