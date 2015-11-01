@@ -1,39 +1,34 @@
 const ALPHAS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const DIGITS = '0123456789';
-const names = new Set();
 
-class Robot {
-  constructor() {
-    this.name = getNotRepeatedName();
-  }
+const random = (values) => values[Math.floor(Math.random() * values.length)];
+const randomAlpha = () => random(ALPHAS);
+const randomDigit = () => random(DIGITS);
 
-  reset() {
-    this.name = getNotRepeatedName();
-  }
-}
+const FORMAT = 'AADDD';
+const FORMATS = { A: randomAlpha, D: randomDigit };
+const generateRandomName = () => [...FORMAT].map(i => FORMATS[i]()).join('');
 
-let getNotRepeatedName = () => {
+let names = new Set();
+const generateUniqueName = () => {
   const name = generateRandomName();
   if (names.has(name)) {
-    return getNotRepeatedName();
+    return generateUniqueName();
   }
 
   names.add(name);
   return name;
 }
 
-let generateRandomName = () => {
-  return []
-    .concat(randomAlpha())
-    .concat(randomAlpha())
-    .concat(randomDigit())
-    .concat(randomDigit())
-    .concat(randomDigit())
-    .join('');
-}
+class Robot {
+  constructor() {
+    this.reset();
+  }
 
-let randomAlpha = () => ALPHAS[Math.floor(Math.random() * ALPHAS.length)];
-let randomDigit = () => DIGITS[Math.floor(Math.random() * DIGITS.length)];
+  reset() {
+    this.name = generateUniqueName();
+  }
+}
 
 export default Robot;
 
