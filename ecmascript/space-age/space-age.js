@@ -10,15 +10,13 @@ const EARTH_SECONDS_IN_A_YEAR = new Map([
     [ 'Neptune', 60193.2 * SECONDS_IN_AN_EARTH_DAY ]
 ]);
 
-class SpaceAge {
-  constructor(seconds) {
-    this.seconds = seconds;
+export default (seconds) => {
+  let SpaceAge = { seconds };
 
-    EARTH_SECONDS_IN_A_YEAR.forEach((factor, planetName) => {
-      SpaceAge.prototype['on' + planetName] = () => +(seconds / factor).toFixed(2);
-    });
-  }
+  EARTH_SECONDS_IN_A_YEAR.forEach((factor, planetName) => {
+    SpaceAge['on' + planetName] = () => +(seconds / factor).toFixed(2);
+  });
+
+  return SpaceAge;
 }
-
-export default SpaceAge;
 
