@@ -6,7 +6,7 @@ class School {
   }
 
   roster() {
-    return Object.assign({}, roster);
+    return JSON.parse(JSON.stringify(roster));
   }
 
   add(name, grade) {
