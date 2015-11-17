@@ -1,6 +1,6 @@
 class Grains {
-  square() {
-    return '1';
+  square(n) {
+    return n.toString();
   }
 }
 
