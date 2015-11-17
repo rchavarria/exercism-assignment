@@ -44,19 +44,19 @@ describe('Grains', () => {
     expect(grains.square(3)).toBe('4');
   });
 
-  xit('square 4', () => {
+  it('square 4', () => {
     expect(grains.square(4)).toBe('8');
   });
 
-  xit('square 16', () => {
+  it('square 16', () => {
     expect(grains.square(16)).toBe('32768');
   });
 
-  xit('square 32', () => {
+  it('square 32', () => {
     expect(grains.square(32)).toBe('2147483648');
   });
 
-  xit('square 64', () => {
+  it('square 64', () => {
     expect(grains.square(64)).toBe('9223372036854775808');
   });
 

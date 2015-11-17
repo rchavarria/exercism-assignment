@@ -1,6 +1,8 @@
+import BigInt from './big-integer';
+
 class Grains {
   square(n) {
-    return Math.pow(2, n - 1).toString();
+    return BigInt(2).pow(n - 1).toString();
   }
 }
 
