@@ -1,6 +1,6 @@
 class Grains {
   square(n) {
-    return n.toString();
+    return Math.pow(2, n - 1).toString();
   }
 }
 
