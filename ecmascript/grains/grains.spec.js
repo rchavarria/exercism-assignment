@@ -36,7 +36,7 @@ describe('Grains', () => {
     expect(grains.square(1)).toBe('1');
   });
 
-  xit('square 2', () => {
+  it('square 2', () => {
     expect(grains.square(2)).toBe('2');
   });
 
