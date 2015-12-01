@@ -10,6 +10,41 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
+function throwIfNoSize(sides) {
+  var size = sides.reduce(function (sum, i) {
+    return sum + i;
+  }, 0);
+  if (size === 0) {
+    throw Error('Triangle with no size is illegal');
+  }
+}
+
+function throwIfSomeNegativeSide(sides) {
+  if (sides.some(function (s) {
+    return s < 0;
+  })) {
+    throw Error('Triangle with negative sides is illegal');
+  }
+}
+
+function throwOnInequality(sides) {
+  var _sides = _slicedToArray(sides, 3);
+
+  var a = _sides[0];
+  var b = _sides[1];
+  var c = _sides[2];
+
+  if (a + b < c || a + c < b || b + c < a) {
+    throw Error('Triangle sides must obbey inequality');
+  }
+}
+
+function throwIfInvalid(sides) {
+  throwIfNoSize(sides);
+  throwIfSomeNegativeSide(sides);
+  throwOnInequality(sides);
+}
+
 var Triangle = (function () {
   function Triangle(a, b, c) {
     _classCallCheck(this, Triangle);
@@ -20,28 +55,13 @@ var Triangle = (function () {
   _createClass(Triangle, [{
     key: 'kind',
     value: function kind() {
-      var _sides = _slicedToArray(this.sides, 3);
+      throwIfInvalid(this.sides);
 
-      var a = _sides[0];
-      var b = _sides[1];
-      var c = _sides[2];
+      var _sides2 = _slicedToArray(this.sides, 3);
 
-      // check for some size
-      if (a + b + c === 0) {
-        throw Error('Triangle with no size is illegal');
-      }
-
-      // check for negative sides
-      if (this.sides.some(function (s) {
-        return s < 0;
-      })) {
-        throw Error('Triangle with negative sides is illegal');
-      }
-
-      // check for inequality
-      if (a + b < c || a + c < b || b + c < a) {
-        throw Error('Triangle sides must obbey inequality');
-      }
+      var a = _sides2[0];
+      var b = _sides2[1];
+      var c = _sides2[2];
 
       if (a === b && a === c && b === c) {
         return 'equilateral';
