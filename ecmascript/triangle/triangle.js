@@ -24,6 +24,19 @@ function throwIfInvalid(sides) {
   throwOnInequality(sides);
 }
 
+function whatKind(sides) {
+  const [ a, b, c ] = sides;
+  if (a === b && a === c && b === c) {
+    return 'equilateral';
+  }
+
+  if (a !== b && a !== c && b !== c) {
+    return 'scalene';
+  }
+
+  return 'isosceles';
+}
+
 class Triangle {
 
   constructor(a, b, c) {
@@ -32,17 +45,7 @@ class Triangle {
 
   kind() {
     throwIfInvalid(this.sides);
-
-    const [ a, b, c ] = this.sides;
-    if (a === b && a === c && b === c) {
-      return 'equilateral';
-    }
-
-    if (a !== b && a !== c && b !== c) {
-      return 'scalene';
-    }
-
-    return 'isosceles';
+    return whatKind(this.sides);
   }
 
 }
