@@ -1,4 +1,4 @@
-let isSilent = (m) => m.trim().length === 0;
+let isSilent = (m) => m.length === 0;
 let isShouting = (m) => m.toUpperCase() === m && m.match(/[A-Z\xc0-\xdf]/);
 let isAsking = (m) => m.endsWith('?');
 let anything = () => true;
@@ -13,7 +13,7 @@ const CONDITIONS = [
 class Bob {
   hey(message) {
     message = message.trim();
-    let [ {response} ] = CONDITIONS.filter((c) => c.question(message));
+    let { response } = CONDITIONS.find(c => c.question(message));
     return response;
   }
 }
