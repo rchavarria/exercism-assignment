@@ -1,12 +1,16 @@
 const ALPHABET_LENGTH = 26;
+const ALLOWED_CHARS = /[a-z]/;
+
 class Pangram {
   constructor(phrase) {
-    this.alphabeticalCharacters = phrase.toLowerCase().replace(/[^a-z]/g, '');
+    this.phrase = phrase;
   }
 
   isPangram() {
-    const uniqueValues = new Set(this.alphabeticalCharacters);
-    return uniqueValues.size === ALPHABET_LENGTH;
+    const alphabetic = [...this.phrase]
+      .map(c => c.toLowerCase())
+      .filter(c => ALLOWED_CHARS.test(c));
+    return new Set(alphabetic).size === ALPHABET_LENGTH;
   }
 }
 
