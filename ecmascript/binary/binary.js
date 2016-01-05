@@ -1,5 +1,6 @@
 const INVALID_DIGITS_REGEXP = /[^01]/g;
-const decimal = bin => parseInt(bin, 10);
+
+const value = bin => bin === '1' ? 1 : 0;
 const power = exp => Math.pow(2, exp);
 
 export default class Binary {
@@ -14,7 +15,8 @@ export default class Binary {
 
     return [...this.binary]
       .reverse()
-      .reduce( (sum, digit, index) => sum + decimal(digit) * power(index), 0);
+      .map((digit, index) => value(digit) * power(index))
+      .reduce((sum, i) => sum + i);
   }
 }
 
