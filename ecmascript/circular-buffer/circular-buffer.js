@@ -1,20 +1,27 @@
 function circularBuffer(size) {
-  let stack = [];
+  let queue = [];
 
   function isFull() {
-    return stack.length === size;
+    return queue.length === size;
   }
 
   function isEmpty() {
-    return stack.length === 0;
+    return queue.length === 0;
   }
 
-  function read() {
+  function safeRead() {
+    return queue.shift();
+  }
+
+  function checkEmptyness() {
     if (isEmpty()) {
       throw bufferEmptyException();
     }
+  }
 
-    return stack.shift();
+  function read() {
+    checkEmptyness();
+    return safeRead();
   }
 
   function write(element) {
@@ -26,16 +33,16 @@ function circularBuffer(size) {
       throw bufferFullException();
     }
 
-    stack.push(element);
+    queue.push(element);
   }
 
   function clear() {
-    stack = [];
+    queue = [];
   }
 
   function forceWrite(element) {
     if (isFull()) {
-      read();
+      safeRead();
     }
     write(element);
   }
@@ -51,7 +58,10 @@ function bufferFullException() {
   return new Error('Buffer Full Exception');
 }
 
-export { circularBuffer as default };
-export { bufferFullException as bufferFullException };
-export { bufferEmptyException as bufferEmptyException };
+export {
+  circularBuffer as default,
+  bufferFullException,
+  bufferEmptyException
+};
+
 
