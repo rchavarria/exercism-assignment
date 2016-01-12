@@ -3,14 +3,14 @@ const ALLOWED_CHARS = /[a-z]/;
 
 class Pangram {
   constructor(phrase) {
-    this.phrase = phrase;
+    this.phrase = phrase.toLowerCase();
   }
 
   isPangram() {
-    const alphabetic = [...this.phrase]
-      .map(c => c.toLowerCase())
-      .filter(c => ALLOWED_CHARS.test(c));
-    return new Set(alphabetic).size === ALPHABET_LENGTH;
+    return [...this.phrase]
+      .filter(c => ALLOWED_CHARS.test(c))
+      .reduce((unique, c) => unique.add(c), new Set())
+      .size === ALPHABET_LENGTH;
   }
 }
 
