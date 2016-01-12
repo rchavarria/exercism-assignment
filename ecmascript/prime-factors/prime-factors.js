@@ -3,17 +3,13 @@ export default class PrimeFactors {
     let factors = [];
     let candidate = 2;
 
-    while (candidate < n) {
+    while (candidate <= n) {
       if (n % candidate === 0) {
         factors.push(candidate);
         n /= candidate;
       } else {
         candidate++;
       }
-    }
-
-    if (n > 1) {
-      factors.push(n);
     }
 
     return factors;
