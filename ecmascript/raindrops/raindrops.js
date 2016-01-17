@@ -1,20 +1,15 @@
+const SOUNDS = [
+  { factor: 3, sound: 'Pling' },
+  { factor: 5, sound: 'Plang' },
+  { factor: 7, sound: 'Plong' }
+];
 
 function convert(drop) {
-  let sound = '';
+  const sounds = SOUNDS
+    .filter(s => drop % s.factor === 0)
+    .map(s => s.sound);
 
-  if (drop % 3 === 0) {
-    sound += 'Pling';
-  }
-
-  if (drop % 5 === 0) {
-    sound += 'Plang';
-  }
-
-  if (drop % 7 === 0) {
-    sound += 'Plong';
-  }
-
-  return sound || drop.toString();
+  return sounds.join('') || drop.toString();
 }
 
 export default () => Object.freeze({ convert });
