@@ -19,21 +19,20 @@ function circularBuffer(size) {
     }
   }
 
+  function checkFullness() {
+    if (isFull()) {
+      throw bufferFullException();
+    }
+  }
+
   function read() {
     checkEmptyness();
     return safeRead();
   }
 
   function write(element) {
-    if (!element) {
-      return;
-    }
-
-    if (isFull()) {
-      throw bufferFullException();
-    }
-
-    queue.push(element);
+    checkFullness();
+    element && queue.push(element);
   }
 
   function clear() {
