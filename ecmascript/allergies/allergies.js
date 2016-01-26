@@ -11,8 +11,7 @@ const POSSIBLE_ALLERGIES = [
 
 function listOfAllergies(allergies) {
   return POSSIBLE_ALLERGIES
-    .filter((_, idx) => allergies & Math.pow(2, idx))
-    .map(candidate => candidate);
+    .filter((_, idx) => allergies & Math.pow(2, idx));
 }
 
 class Allergies {
