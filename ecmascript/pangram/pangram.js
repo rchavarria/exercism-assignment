@@ -8,7 +8,7 @@ class Pangram {
 
   isPangram() {
     return [...this.phrase]
-      .filter(c => ALLOWED_CHARS.test(c))
+      .filter(ALLOWED_CHARS.test.bind(ALLOWED_CHARS))
       .reduce((unique, c) => unique.add(c), new Set())
       .size === ALPHABET_LENGTH;
   }
