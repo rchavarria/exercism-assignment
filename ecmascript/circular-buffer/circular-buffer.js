@@ -32,18 +32,26 @@ function circularBuffer(size) {
 
   function write(element) {
     checkFullness();
-    element && queue.push(element);
+    safeWrite(element);
   }
 
-  function clear() {
-    queue = [];
+  function safeWrite(element) {
+    if (element === undefined || element === null) {
+      return;
+    }
+
+    queue.push(element);
   }
 
   function forceWrite(element) {
     if (isFull()) {
       safeRead();
     }
-    write(element);
+    safeWrite(element);
+  }
+
+  function clear() {
+    queue = [];
   }
 
   return Object.freeze({ read, write, clear, forceWrite });
