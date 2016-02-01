@@ -1,10 +1,4 @@
-function keep(list, filter) {
-  return list.filter(filter);
-}
-
-function discard(list, filter) {
-  return list.filter(e => !filter(e));
-}
-
+const keep = (l, f) => l.filter(f);
+const discard = (l, f) => l.filter(e => !f(e));
 export default Object.freeze({ keep, discard });
 
