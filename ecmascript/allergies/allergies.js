@@ -1,17 +1,24 @@
-const POSSIBLE_ALLERGIES = [
-  'eggs',
-  'peanuts',
-  'shellfish',
-  'strawberries',
-  'tomatoes',
-  'chocolate',
-  'pollen',
-  'cats'
-];
+const ALLERGENS = new Map([
+  [ 1, 'eggs' ],
+  [ 2, 'peanuts' ],
+  [ 4, 'shellfish' ],
+  [ 8, 'strawberries' ],
+  [ 16, 'tomatoes' ],
+  [ 32, 'chocolate' ],
+  [ 64, 'pollen' ],
+  [ 128, 'cats' ]
+]);
 
 function listOfAllergies(allergies) {
-  return POSSIBLE_ALLERGIES
-    .filter((_, idx) => allergies & Math.pow(2, idx));
+  let list = [];
+
+  for (let [ key, value ] of ALLERGENS) {
+    if (allergies & key) {
+      list.push(value);
+    }
+  }
+
+  return list;
 }
 
 class Allergies {
