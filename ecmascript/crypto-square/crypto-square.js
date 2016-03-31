@@ -1,4 +1,4 @@
-const FORBIDDEN_CHARACTERS = /[^a-z0-9]/gi;
+const FORBIDDEN_CHARACTERS = /[\W]/gi;
 
 function Crypto(text) {
 
