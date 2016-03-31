@@ -1,43 +1,23 @@
 const FORBIDDEN_CHARACTERS = /[\W]/gi;
 
 function Crypto(text) {
+  const normalizedText = text.replace(FORBIDDEN_CHARACTERS, '').toLowerCase();
+  const size = Math.ceil(Math.sqrt(normalizedText.length))
+  const splitIntoSegments = new RegExp(`.{1,${size}}`, 'g');
+  const segments = normalizedText.match(splitIntoSegments);
 
-  function normalizePlaintext() {
-    return text.replace(FORBIDDEN_CHARACTERS, '').toLowerCase();
+  function transpose(segments, length) {
+    return Array.from( {length}, (item, i) =>
+      segments.map(s => s[i] || '').join('')
+    );
   }
 
-  function size() {
-    const normalized = normalizePlaintext();
-    const atLeastSize = Math.sqrt(normalized.length);
-    return Math.ceil(atLeastSize);
-  }
-
-  function plaintextSegments() {
-    const normalized = normalizePlaintext();
-    const segmentSize = size();
-    const splitIntoSegments = new RegExp(`.{1,${segmentSize}}`, 'g');
-    return normalized.match(splitIntoSegments);
-  }
-
-  function readColumns(columns, rowLength) {
-    let message = '';
-
-    for (let i = 0; i < rowLength; i++) {
-      columns.forEach(segment => {
-        message += segment[i] ? segment[i] : ''
-      });
-    }
-
-    return message;
-  }
-
-  function ciphertext() {
-    const segmentSize = size();
-    const segments = plaintextSegments();
-    return readColumns(segments, segmentSize);
-  }
-
-  return Object.freeze({ normalizePlaintext, size, plaintextSegments, ciphertext });
+  return Object.freeze({
+    normalizePlaintext: () => normalizedText,
+    size: () => size,
+    plaintextSegments: () => segments,
+    ciphertext: () => transpose(segments, size).join('')
+  });
 }
 
 export default Crypto;
