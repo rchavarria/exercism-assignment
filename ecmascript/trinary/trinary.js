@@ -8,7 +8,8 @@ function Trinary(trinary) {
 
     return [...trinary]
       .reverse()
-      .map((d, i) => parseInt(d) * Math.pow(3, i))
+      .map(d => parseInt(d, 10))
+      .map((d, i) => d * (3 ** i))
       .reduce((sum, d) => sum + d, 0);
   }
 
