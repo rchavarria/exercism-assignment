@@ -8,9 +8,9 @@ defmodule Bob do
     end
   end
 
-  defp silence?(input), do: String.strip(input) == ""
+  defp silence?(input), do: String.trim(input) == ""
   defp shouting?(input), do: String.upcase(input) == input and String.downcase(input) != input
-  defp asking?(input), do: String.ends_with?(input, "?")
-  defp talking?(input), do: true
+  defp asking?(input), do: String.last(input) == "?"
+  defp talking?(_), do: true
 
 end
