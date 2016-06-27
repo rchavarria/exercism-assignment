@@ -44,27 +44,22 @@ defmodule BobTest do
     assert Bob.hey("Ending with ? means a question.") == "Whatever."
   end
 
-  @tag :pending
   test "silence" do
     assert Bob.hey("") == "Fine. Be that way!"
   end
 
-  @tag :pending
   test "prolonged silence" do
     assert Bob.hey("  ") == "Fine. Be that way!"
   end
 
-  @tag :pending
   test "only numbers" do
     assert Bob.hey("1, 2, 3") == "Whatever."
   end
 
-  @tag :pending
   test "question with numbers" do
     assert Bob.hey("4?") == "Sure."
   end
 
-  @tag :pending
   test "shouting in Russian" do
     assert Bob.hey("УХОДИ") == "Whoa, chill out!"
   end

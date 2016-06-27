@@ -1,9 +1,10 @@
 defmodule Bob do
   def hey(input) do
     cond do
-        String.ends_with?(input, "?") -> "Sure."
-        String.upcase(input) == input -> "Whoa, chill out!"
-        true -> "Whatever."
+      String.strip(input) == "" -> "Fine. Be that way!"
+      String.upcase(input) == input and Regex.match?(~r/[A-Z\xc0-\xdf]/, input) -> "Whoa, chill out!"
+      String.ends_with?(input, "?") -> "Sure."
+      true -> "Whatever."
     end
   end
 end
