@@ -10,11 +10,7 @@ defmodule Words do
   end
   
   defp word_reducer(word, word_map) do
-    { _, reduced } = Map.get_and_update(word_map, word, &update_count/1)
-    reduced
+    Map.update(word_map, word, 1, fn c -> c + 1 end)
   end
-
-  defp update_count(nil), do: { nil, 1 }
-  defp update_count(current_count), do: { current_count, current_count + 1 }
 
 end
