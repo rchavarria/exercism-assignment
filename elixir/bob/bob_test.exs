@@ -28,6 +28,10 @@ defmodule BobTest do
     assert Bob.hey("This Isn't Shouting!") == "Whatever."
   end
 
+  test "asking in capitals" do
+    assert Bob.hey("THIS ISN'T SHOUTING?") == "Sure."
+  end
+
   test "shouting numbers" do
     assert Bob.hey("1, 2, 3 GO!") == "Whoa, chill out!"
   end

@@ -2,8 +2,8 @@ defmodule Bob do
   def hey(input) do
     cond do
       silence?(input) -> "Fine. Be that way!"
-      shouting?(input) -> "Whoa, chill out!"
       asking?(input) -> "Sure."
+      shouting?(input) -> "Whoa, chill out!"
       talking?(input) -> "Whatever."
     end
   end
