@@ -1,17 +1,16 @@
 defmodule Words do
-  @doc """
-  Count the number of words in the sentence.
 
-  Words are compared case-insensitively.
-  """
-  @spec count(String.t) :: map
+  @split_on_non_alphanumeric ~r/[^[:alnum:]|-]/u
+
   def count(sentence) do
-    words = String.split(sentence, " ")
-    words |> Enum.reduce(%{}, &word_reducer/2)
+    Regex.split(@split_on_non_alphanumeric, sentence)
+      |> Enum.filter(fn w -> String.length(w) > 0 end)
+      |> Enum.map(&String.downcase/1)
+      |> Enum.reduce(%{}, &word_reducer/2)
   end
   
-  defp word_reducer(word, word_count) do
-    { _, reduced } = Map.get_and_update(word_count, word, &update_count/1)
+  defp word_reducer(word, word_map) do
+    { _, reduced } = Map.get_and_update(word_map, word, &update_count/1)
     reduced
   end
 
