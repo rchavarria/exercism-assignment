@@ -47,6 +47,11 @@ defmodule WordsTest do
     assert Words.count("go Go GO") == expected
   end
 
+  test "mazubieta's example" do
+    expected = %{ "foo" => 1, "bar" => 1 }
+    assert Words.count("foo|bar") == expected
+  end
+
   test "German" do
     expected = %{"götterfunken" => 1, "schöner" => 1, "freude" => 1}
     assert Words.count("Freude schöner Götterfunken") == expected

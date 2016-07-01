@@ -1,6 +1,6 @@
 defmodule Words do
 
-  @split_on_non_alphanumeric ~r/[^[:alnum:]|-]/u
+  @split_on_non_alphanumeric ~r/[^[:alnum:]-]/u
 
   def count(sentence) do
     Regex.split(@split_on_non_alphanumeric, sentence)
