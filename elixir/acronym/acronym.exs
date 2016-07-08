@@ -5,15 +5,15 @@ defmodule Acronym do
   """
   @spec abbreviate(String.t()) :: String.t()
   def abbreviate(string) do
-    capture_capital_letter = ~r{([A-Z])}
-    word_separator = ~r{[[:blank:]-]}
-
     string
-    |> String.replace(capture_capital_letter, " \\1")
-    |> String.split(word_separator)
-    |> Enum.filter(&(String.length(&1) > 0))
-    |> Enum.map_join("", &String.first/1)
+    |> scan_first_and_capital_letters
+    |> Enum.join
     |> String.upcase
+  end
+
+  defp scan_first_and_capital_letters(string) do
+    first_and_capital = ~r{\b[a-z]|[A-Z]}
+    Regex.scan(first_and_capital, string)
   end
 
 end
