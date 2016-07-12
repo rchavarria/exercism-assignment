@@ -35,13 +35,30 @@ defmodule RunLengthEncoder do
     # IO.puts "counting one plus of #{current_char} up to #{current_count + 1}"
     { [ current_count + 1 | tail ], current_char }
   end
-  defp count_similar_chars(current_char, { count_list, previous_char }) do
+  defp count_similar_chars(current_char, { count_list, _ }) do
     # IO.puts "new char found, #{current_char}, previous was #{previous_char}, list was #{inspect count_list}"
     { [ 1 | count_list ], current_char }
   end
 
   @spec decode(String.t) :: String.t
   def decode(string) do
-    string
+    Regex.scan(~r{[0-9]+[A-Z]+}, string)
+    |> Enum.flat_map(&(&1))
+    |> Enum.map(&expand/1)
+    |> Enum.join
   end
+
+  defp expand(string) do
+    character = String.last string
+    digit = string
+            |> String.replace(character, "")
+            |> String.to_integer
+    append("", character, digit)
+  end
+
+  defp append(string, _, 0), do: string
+  defp append(string, character, times) do
+    append(string <> character, character, times - 1)
+  end
+
 end
