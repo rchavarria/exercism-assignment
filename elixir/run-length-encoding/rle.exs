@@ -14,6 +14,7 @@ defmodule RunLengthEncoder do
                 |> Enum.reduce({ [], "" }, &count_similar_chars/2)
 
     [ _ | reversed_count ] = count_list
+    # IO.puts "reversed_count is: #{inspect reversed_count}"
 
     { result_string, _ } = reversed_count
                           |> Enum.reverse
@@ -26,18 +27,21 @@ defmodule RunLengthEncoder do
   end
 
   defp count_similar_chars(current_char, { [], "" }) do
+    # IO.puts "First char is #{current_char}"
     { [1], current_char }
   end
   defp count_similar_chars(current_char, { count_list, current_char }) do
     [ current_count | tail ] = count_list
+    # IO.puts "counting one plus of #{current_char} up to #{current_count + 1}"
     { [ current_count + 1 | tail ], current_char }
   end
   defp count_similar_chars(current_char, { count_list, previous_char }) do
-    { [ 1 | count_list ], previous_char }
+    # IO.puts "new char found, #{current_char}, previous was #{previous_char}, list was #{inspect count_list}"
+    { [ 1 | count_list ], current_char }
   end
 
   @spec decode(String.t) :: String.t
   def decode(string) do
-
+    string
   end
 end
