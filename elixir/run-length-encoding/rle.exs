@@ -25,9 +25,15 @@ defmodule RunLengthEncoder do
 
   @spec decode(String.t) :: String.t
   def decode(string) do
-    Regex.scan(~r{[[:digit:]]+[[:alpha:]]}, string)
-    |> List.flatten
+    string
+    |> split_into_groups
     |> Enum.map_join(&expand/1)
+  end
+
+  defp split_into_groups(string) do
+    ~r{[[:digit:]]+[[:alpha:]]}
+    |> Regex.scan(string)
+    |> List.flatten
   end
 
   defp expand(string) do
