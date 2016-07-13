@@ -26,7 +26,7 @@ defmodule RunLengthEncoder do
   @spec decode(String.t) :: String.t
   def decode(string) do
     Regex.scan(~r{[0-9]+[A-Z]+}, string)
-    |> Enum.flat_map(&(&1))
+    |> List.flatten
     |> Enum.map(&expand/1)
     |> Enum.join
   end
