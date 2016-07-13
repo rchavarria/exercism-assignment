@@ -11,8 +11,16 @@ defmodule RunLengthEncoder do
   def encode(string) do
     string
     |> String.graphemes
-    |> Enum.chunk_by(&(&1))
-    |> Enum.map_join(fn(x) -> "#{length(x)}#{List.first(x)}" end)
+    |> group_by_grapheme
+    |> Enum.map_join(&encode_each_group/1)
+  end
+
+  defp group_by_grapheme(graphemes) do
+    graphemes |> Enum.chunk_by(&(&1))
+  end
+
+  defp encode_each_group(graphemes_group) do
+    "#{length(graphemes_group)}#{List.first(graphemes_group)}" 
   end
 
   @spec decode(String.t) :: String.t
