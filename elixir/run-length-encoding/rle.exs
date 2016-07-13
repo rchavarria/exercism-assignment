@@ -27,15 +27,11 @@ defmodule RunLengthEncoder do
   def decode(string) do
     Regex.scan(~r{[[:digit:]]+[[:alpha:]]}, string)
     |> List.flatten
-    |> Enum.map(&expand/1)
-    |> Enum.join
+    |> Enum.map_join(&expand/1)
   end
 
   defp expand(string) do
-    character = String.last string
-    digit = string
-            |> String.replace(character, "")
-            |> String.to_integer
+    { digit, character } = Integer.parse(string)
     append("", character, digit)
   end
 
