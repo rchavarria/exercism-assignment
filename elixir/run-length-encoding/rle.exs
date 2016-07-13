@@ -32,12 +32,7 @@ defmodule RunLengthEncoder do
 
   defp expand(string) do
     { digit, character } = Integer.parse(string)
-    append("", character, digit)
-  end
-
-  defp append(string, _, 0), do: string
-  defp append(string, character, times) do
-    append(string <> character, character, times - 1)
+    String.duplicate(character, digit)
   end
 
 end
