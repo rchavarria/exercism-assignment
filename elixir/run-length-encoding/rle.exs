@@ -11,11 +11,10 @@ defmodule RunLengthEncoder do
   def encode(""), do: ""
   def encode(string) do
     { count_list, _ } = string
-      |> String.split("")
+      |> String.graphemes
       |> Enum.reduce({ [], "" }, &count_similar_chars/2)
 
-    [ _ | reversed_count ] = count_list
-    { result_string, _ } = reversed_count
+    { result_string, _ } = count_list
       |> Enum.reverse
       |> Enum.reduce({ "", 0 }, fn (count, { result_string, index }) ->
         result_string = result_string <> Integer.to_string(count) <> String.at(string, index)
