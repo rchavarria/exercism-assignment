@@ -8,13 +8,17 @@ defmodule ListOps do
 
   @spec count(list) :: non_neg_integer
   def count(l) do
-
+    _count(l, 0)
   end
+  defp _count([], n), do: n
+  defp _count([ _ | tail ], n), do: _count(tail, n + 1)
 
   @spec reverse(list) :: list
   def reverse(l) do
-
+    _reverse(l, [])
   end
+  defp _reverse([], reversed), do: reversed
+  defp _reverse([ head | tail ], reversed), do: _reverse(tail, [ head | reversed ])
 
   @spec map(list, (any -> any)) :: list
   def map(l, f) do
