@@ -24,7 +24,7 @@ defmodule ListOps do
   def map(l, f) do
     _map(l, f)
   end
-  defp _map([], f), do: []
+  defp _map([], _), do: []
   defp _map([ head | tail ], f) do
     mapped_head = f.(head)
     [ mapped_head | _map(tail, f) ]
@@ -34,7 +34,7 @@ defmodule ListOps do
   def filter(l, f) do
     _filter(l, f)
   end
-  defp _filter([], f), do: []
+  defp _filter([], _), do: []
   defp _filter([ head | tail ], f) do
     if f.(head) do
       [ head | _filter(tail, f) ]
@@ -58,8 +58,6 @@ defmodule ListOps do
   def append(a, b) do
     _append(a, b)
   end
-  defp _append([], []), do: []
-  defp _append(a, []), do: a
   defp _append([], b), do: b
   defp _append([ head | tail ], b) do
     [ head | _append(tail, b) ]
