@@ -1,9 +1,17 @@
 defmodule Sublist do
-  @doc """
-  Returns whether the first list is a sublist or a superlist of the second list
-  and if not whether it is equal or unequal to the second list.
-  """
+  def compare([], []), do: :equal
+  def compare([], _), do: :sublist
+  def compare(_, []), do: :superlist
   def compare(a, b) do
-
+    [ head_a | tail_a ] = a
+    [ head_b | tail_b ] = b
+    case compare_elements(head_a, head_b) do
+      true -> compare(tail_a, tail_b)
+      false -> compare(tail_a, b)
+    end
   end
+
+  defp compare_elements(x, x), do: true
+  defp compare_elements(x, y), do: false
+
 end

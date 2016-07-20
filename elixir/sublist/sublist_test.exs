@@ -12,28 +12,23 @@ defmodule SublistTest do
     assert Sublist.compare([], []) == :equal
   end
 
-  @tag :pending
   test "empty is a sublist of anything" do
     assert Sublist.compare([], [nil]) == :sublist
   end
 
-  @tag :pending
   test "anything is a superlist of empty" do
     assert Sublist.compare([nil], []) == :superlist
   end
 
-  @tag :pending
   test "1 is not 2" do
     assert Sublist.compare([1], [2]) == :unequal
   end
 
-  @tag :pending
   test "comparing massive equal lists" do
     l = Enum.to_list(1..1_000_000)
     assert Sublist.compare(l, l) == :equal
   end
 
-  @tag :pending
   test "sublist at start" do
     assert Sublist.compare([1,2,3],[1,2,3,4,5]) == :sublist
   end
