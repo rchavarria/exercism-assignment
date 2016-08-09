@@ -5,23 +5,28 @@ defmodule Sublist do
   def compare(_, []), do: :superlist
   def compare(a, b), do: compare_lists(a, b, :equal)
 
-  def compare_lists(a, b, comparison_result) when length(a) == length(b) do
+  defp compare_lists(a, b, comparison_result) when length(a) == length(b) do
     compare_same_length_lists(a, b, comparison_result)
   end
-  def compare_lists(a, b, _) when length(a) < length(b) do
-    [ _ | tail_b ] = b
-    sublist = Enum.take(b, length(a))
-    case compare_same_length_lists(a, sublist, :sublist) do
-      :unequal -> compare_lists(a, tail_b, :sublist)
-      :sublist -> :sublist
-    end
+  defp compare_lists(a, b, :equal) when length(a) < length(b) do
+    compare_different_length_lists(a, b, :sublist)
   end
-  def compare_lists(a, b, _) when length(a) > length(b) do
-    [ _ | tail_a ] = a
-    superlist = Enum.take(a, length(b))
-    case compare_same_length_lists(superlist, b, :superlist) do
-      :unequal -> compare_lists(tail_a, b, :superlist)
-      :superlist -> :superlist
+  defp compare_lists(a, b, comparison_result) when length(a) < length(b) do
+    compare_different_length_lists(a, b, comparison_result)
+  end
+  defp compare_lists(a, b, :equal) when length(a) > length(b) do
+    compare_different_length_lists(b, a, :superlist)
+  end
+  defp compare_lists(a, b, comparison_result) when length(a) > length(b) do
+    compare_different_length_lists(b, a, comparison_result)
+  end
+
+  defp compare_different_length_lists(a, b, comparison_result) do
+    [ _ | tail ] = b
+    smaller_list = Enum.take(b, length(a))
+    case compare_same_length_lists(a, smaller_list, comparison_result) do
+      :unequal -> compare_lists(a, tail, comparison_result)
+      _ -> comparison_result
     end
   end
 
@@ -29,8 +34,6 @@ defmodule Sublist do
   defp compare_same_length_lists([head | a], [head | b], comparison_result) do
     compare_same_length_lists(a, b, comparison_result)
   end
-  defp compare_same_length_lists(_, _, _) do
-    :unequal
-  end
+  defp compare_same_length_lists(_, _, _), do: :unequal
 
 end
