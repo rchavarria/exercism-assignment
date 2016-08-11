@@ -1,38 +1,31 @@
 defmodule DNA do
   @nucleotides [?A, ?C, ?G, ?T]
 
-  @doc """
-  Counts individual nucleotides in a DNA strand.
-
-  ## Examples
-
-  iex> DNA.count('AATAA', ?A)
-  4
-
-  iex> DNA.count('AATAA', ?T)
-  1
-  """
   @spec count([char], char) :: non_neg_integer
   def count(strand, nucleotide) do
-    Enum.count(strand, &(&1 == nucleotide))
+    validate_nucleotide(nucleotide)
+    |> validate_strand(strand)
+    |> validated_count(strand, nucleotide)
   end
 
+  defp validate_nucleotide(n) do
+    Enum.any?(@nucleotides, &(&1 == n))
+  end
 
-  @doc """
-  Returns a summary of counts by nucleotide.
+  defp validate_strand(false, _), do: raise ArgumentError, message: "Wrong nucleotide"
+  defp validate_strand(true, strand) do
+    Enum.all?(strand, &(validate_nucleotide(&1)))
+  end
 
-  ## Examples
+  defp validated_count(false, _, _), do: raise ArgumentError, message: "Wrong strand"
+  defp validated_count(true, strand, n) do
+    Enum.count(strand, &(&1 == n))
+  end
 
-  iex> DNA.histogram('AATAA')
-  %{?A => 4, ?T => 1, ?C => 0, ?G => 0}
-  """
   @spec histogram([char]) :: map
   def histogram(strand) do
-    %{
-      ?A => count(strand, ?A),
-      ?T => count(strand, ?T),
-      ?C => count(strand, ?C),
-      ?G => count(strand, ?G)
-    }
+    Enum.reduce(@nucleotides, %{}, fn(elem, hist) ->
+      Map.put_new(hist, elem, count(strand, elem))
+    end)
   end
 end
