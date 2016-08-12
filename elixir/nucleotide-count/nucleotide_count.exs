@@ -1,31 +1,20 @@
 defmodule DNA do
-  @nucleotides [?A, ?C, ?G, ?T]
+  @nucleotides [ ?A, ?C, ?G, ?T ]
 
   @spec count([char], char) :: non_neg_integer
+  def count(strand, nucleotide) when not nucleotide in @nucleotides, do: raise ArgumentError
   def count(strand, nucleotide) do
-    validate_nucleotide(nucleotide)
-    |> validate_strand(strand)
-    |> validated_count(strand, nucleotide)
+    Enum.count(strand, &(valid_nucleotide?(&1, nucleotide)))
   end
 
-  defp validate_nucleotide(n) do
-    Enum.any?(@nucleotides, &(&1 == n))
-  end
-
-  defp validate_strand(false, _), do: raise ArgumentError, message: "Wrong nucleotide"
-  defp validate_strand(true, strand) do
-    Enum.all?(strand, &(validate_nucleotide(&1)))
-  end
-
-  defp validated_count(false, _, _), do: raise ArgumentError, message: "Wrong strand"
-  defp validated_count(true, strand, n) do
-    Enum.count(strand, &(&1 == n))
-  end
+  defp valid_nucleotide?(s, _) when not s in @nucleotides, do: raise ArgumentError
+  defp valid_nucleotide?(n, n), do: true
+  defp valid_nucleotide?(_, _), do: false
 
   @spec histogram([char]) :: map
   def histogram(strand) do
-    Enum.reduce(@nucleotides, %{}, fn(elem, hist) ->
-      Map.put_new(hist, elem, count(strand, elem))
-    end)
+    for n <- @nucleotides, into: Map.new do
+      { n, count(strand, n) }
+    end
   end
 end
