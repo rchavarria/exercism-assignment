@@ -48,42 +48,42 @@ defmodule RaindropsTest do
     assert Raindrops.convert(14) == "Plong"
   end
 
-  @tag :pending
+  # @tag :pending
   test "15" do
     assert Raindrops.convert(15) == "PlingPlang"
   end
 
-  @tag :pending
+  # @tag :pending
   test "21" do
     assert Raindrops.convert(21) == "PlingPlong"
   end
 
-  @tag :pending
+  # @tag :pending
   test "25" do
     assert Raindrops.convert(25) == "Plang"
   end
 
-  @tag :pending
+  # @tag :pending
   test "35" do
     assert Raindrops.convert(35) == "PlangPlong"
   end
 
-  @tag :pending
+  # @tag :pending
   test "49" do
     assert Raindrops.convert(49) == "Plong"
   end
 
-  @tag :pending
+  # @tag :pending
   test "52" do
     assert Raindrops.convert(52) == "52"
   end
 
-  @tag :pending
+  # @tag :pending
   test "105" do
     assert Raindrops.convert(105) == "PlingPlangPlong"
   end
 
-  @tag :pending
+  # @tag :pending
   test "12121" do
     assert Raindrops.convert(12121) == "12121"
   end
