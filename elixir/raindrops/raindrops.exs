@@ -9,13 +9,13 @@ defmodule Raindrops do
   @spec convert(pos_integer) :: String.t
   def convert(n) do
     @noises |> Enum.filter(fn { key, noise } -> rem(n, key) == 0 end)
-            |> Enum.map(fn { _, noise } -> noise end)
+            |> extract_noises
             |> emit_sound_for(n)
   end
 
-  # return the sound if `n` is divisible by `key`
-  defp convert_drop({ key, sound }, n) when rem(n, key) == 0, do: sound
-  defp convert_drop(_, _), do: ""
+  defp extract_noises(noises) do
+    noises |> Enum.map(fn { _, noise } -> noise end)
+  end
 
   # select between a silence or all sounds
   defp emit_sound_for([], n), do: to_string(n)
