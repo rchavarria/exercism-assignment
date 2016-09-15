@@ -1,6 +1,6 @@
 defmodule Raindrops do
 
-  @drops [
+  @noises [
     { 3, "Pling" },
     { 5, "Plang" },
     { 7, "Plong" }
@@ -8,10 +8,10 @@ defmodule Raindrops do
 
   @spec convert(pos_integer) :: String.t
   def convert(n) do
-    @drops
-    |> Enum.map(fn drop -> convert_drop(drop, n) end)
-    |> Enum.join
-    |> emit_sound_for(n)
+    @noises |> Enum.filter(fn { key, noise } -> rem(n, key) == 0 end)
+            |> Enum.map(fn { _, noise } -> noise end)
+            |> Enum.join
+            |> emit_sound_for(n)
   end
 
   # return the sound if `n` is divisible by `key`
