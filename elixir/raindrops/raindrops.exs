@@ -8,9 +8,13 @@ defmodule Raindrops do
 
   @spec convert(pos_integer) :: String.t
   def convert(n) do
-    @noises |> Enum.filter(fn { key, noise } -> rem(n, key) == 0 end)
+    @noises |> noises_made_by_drop(n)
             |> extract_noises
             |> emit_sound_for(n)
+  end
+
+  defp noises_made_by_drop(noises, n) do
+    noises |> Enum.filter(fn { key, _ } -> rem(n, key) == 0 end)
   end
 
   defp extract_noises(noises) do
