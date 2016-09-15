@@ -10,7 +10,6 @@ defmodule Raindrops do
   def convert(n) do
     @noises |> Enum.filter(fn { key, noise } -> rem(n, key) == 0 end)
             |> Enum.map(fn { _, noise } -> noise end)
-            |> Enum.join
             |> emit_sound_for(n)
   end
 
@@ -19,7 +18,7 @@ defmodule Raindrops do
   defp convert_drop(_, _), do: ""
 
   # select between a silence or all sounds
-  defp emit_sound_for("", n), do: to_string(n)
-  defp emit_sound_for(sound, _), do: sound
+  defp emit_sound_for([], n), do: to_string(n)
+  defp emit_sound_for(sounds, _), do: Enum.join(sounds)
 
 end
