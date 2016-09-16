@@ -37,7 +37,7 @@ defmodule Scrabble do
     word |> normalize
          |> split_into_characters
          |> compute_scores
-         |> Enum.reduce(0, &(&1 + &2))
+         |> sum
   end
 
   # remove white spaces and convert to upper case
@@ -51,5 +51,7 @@ defmodule Scrabble do
   defp split_into_characters(word), do: String.split(word, "", trim: true)
 
   defp compute_scores(characters), do: Enum.map(characters, &(@scores[&1]))
+
+  defp sum(scores), do: Enum.reduce(scores, 0, &(&1 + &2))
 
 end
