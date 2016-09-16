@@ -35,7 +35,7 @@ defmodule Scrabble do
   @spec score(String.t) :: non_neg_integer
   def score(word) do
     word |> normalize
-         |> String.split("", trim: true)
+         |> split_into_characters
          |> Enum.map(&(@scores[&1]))
          |> Enum.reduce(0, &(&1 + &2))
   end
@@ -47,5 +47,7 @@ defmodule Scrabble do
     word |> String.replace(all_whitespaces, "")
          |> String.upcase
   end
+
+  defp split_into_characters(word), do: String.split(word, "", trim: true)
 
 end
