@@ -29,17 +29,23 @@ defmodule Scrabble do
     "Z" => 10
   }
 
-  @all_whitespaces ~r{\s}
-
   @doc """
   Calculate the scrabble score for the word.
   """
   @spec score(String.t) :: non_neg_integer
   def score(word) do
-    word |> String.replace(@all_whitespaces, "")
-         |> String.upcase
+    word |> normalize
          |> String.split("", trim: true)
          |> Enum.map(&(@scores[&1]))
          |> Enum.reduce(0, &(&1 + &2))
   end
+
+  # remove white spaces and convert to upper case
+  defp normalize(word) do
+    all_whitespaces = ~r{\s}
+
+    word |> String.replace(all_whitespaces, "")
+         |> String.upcase
+  end
+
 end
