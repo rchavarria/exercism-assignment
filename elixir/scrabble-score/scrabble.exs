@@ -36,7 +36,7 @@ defmodule Scrabble do
   def score(word) do
     word |> normalize
          |> split_into_characters
-         |> Enum.map(&(@scores[&1]))
+         |> compute_scores
          |> Enum.reduce(0, &(&1 + &2))
   end
 
@@ -49,5 +49,7 @@ defmodule Scrabble do
   end
 
   defp split_into_characters(word), do: String.split(word, "", trim: true)
+
+  defp compute_scores(characters), do: Enum.map(characters, &(@scores[&1]))
 
 end
