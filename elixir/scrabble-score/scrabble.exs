@@ -1,57 +1,37 @@
 defmodule Scrabble do
 
-  @scores %{
-    "A" => 1,
-    "E" => 1,
-    "I" => 1,
-    "O" => 1,
-    "U" => 1,
-    "L" => 1,
-    "N" => 1,
-    "R" => 1,
-    "S" => 1,
-    "T" => 1,
-    "D" => 2,
-    "G" => 2,
-    "B" => 3,
-    "C" => 3,
-    "M" => 3,
-    "P" => 3,
-    "F" => 4,
-    "H" => 4,
-    "V" => 4,
-    "W" => 4,
-    "Y" => 4,
-    "K" => 5,
-    "J" => 8,
-    "X" => 8,
-    "Q" => 10,
-    "Z" => 10
-  }
+  @letter_scores [
+    { ~w(A E I O U L N R S T),  1 },
+    { ~w(D G)                ,  2 },
+    { ~w(B C M P)            ,  3 },
+    { ~w(F H V W Y)          ,  4 },
+    { ~w(K)                  ,  5 },
+    { ~w(J X)                ,  8 },
+    { ~w(Q Z)                , 10 }
+  ]
 
   @doc """
   Calculate the scrabble score for the word.
   """
   @spec score(String.t) :: non_neg_integer
   def score(word) do
-    word |> normalize
-         |> split_into_characters
+    word |> split_into_characters
          |> compute_scores
-         |> sum
+         |> Enum.sum
   end
 
-  # remove white spaces and convert to upper case
-  defp normalize(word) do
-    all_whitespaces = ~r{\s}
-
-    word |> String.replace(all_whitespaces, "")
+  # defp split_into_characters(word), do: String.split(word, "", trim: true)
+  defp split_into_characters(word) do
+    word |> String.trim
          |> String.upcase
+         |> String.graphemes
   end
 
-  defp split_into_characters(word), do: String.split(word, "", trim: true)
+  defp compute_scores(characters), do: Enum.map(characters, &find_score_for/1)
 
-  defp compute_scores(characters), do: Enum.map(characters, &(@scores[&1]))
-
-  defp sum(scores), do: Enum.reduce(scores, 0, &(&1 + &2))
+  defp find_score_for(letter) do
+    { _, score } = Enum.find(@letter_scores, fn { letters, _ } -> letter in letters end)
+    score
+  end
 
 end
