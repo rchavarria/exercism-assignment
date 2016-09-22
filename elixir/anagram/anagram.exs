@@ -4,6 +4,12 @@ defmodule Anagram do
   """
   @spec match(String.t, [String.t]) :: [String.t]
   def match(base, candidates) do
-
+    anagram_to_search = hash(base)
+    candidates
+    |> Enum.filter(&(String.downcase(&1) != base))
+    |> Enum.filter(&(hash(&1) == anagram_to_search))
   end
+
+  defp hash(word), do: word |> String.downcase |> String.graphemes |> Enum.sort |> Enum.join
+
 end
