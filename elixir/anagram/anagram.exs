@@ -17,6 +17,12 @@ defmodule Anagram do
     hash(candidate) == hash(source)
   end
 
-  defp hash(word), do: word |> String.downcase |> String.graphemes |> Enum.sort |> Enum.join
+  defp hash(word) do
+    word
+    |> String.downcase
+    |> String.graphemes
+    |> Enum.sort
+    |> Enum.join
+  end
 
 end
