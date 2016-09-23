@@ -5,15 +5,15 @@ defmodule Anagram do
   @spec match(String.t, [String.t]) :: [String.t]
   def match(base, candidates) do
     candidates
-    |> Enum.filter(&(not_source_word(&1, base)))
-    |> Enum.filter(&(candidate_matches_word(&1, base)))
+    |> Enum.filter(&(not_source_word?(&1, base)))
+    |> Enum.filter(&(is_anagram?(&1, base)))
   end
 
-  defp not_source_word(candidate, source) do
+  defp not_source_word?(candidate, source) do
     String.downcase(candidate) != source
   end
 
-  defp candidate_matches_word(candidate, source) do
+  defp is_anagram?(candidate, source) do
     hash(candidate) == hash(source)
   end
 
