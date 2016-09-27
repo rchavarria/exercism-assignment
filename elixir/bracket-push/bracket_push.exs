@@ -1,18 +1,24 @@
 defmodule BracketPush do
 
-  @opening_brackets [ "{" ]
-  @closing_brackets [ "}" ]
-
   @doc """
   Checks that all the brackets and braces in the string are matched correctly, and nested correctly
   """
   @spec check_brackets(String.t) :: boolean
   def check_brackets(str) do
-    graphemes = String.graphemes(str)
+    replaced = str
+               |> String.replace(~r{[a-z\s]}, "")
+               |> String.replace("{}", "")
+               |> String.replace("[]", "")
+               |> String.replace("()", "")
 
-    openings = graphemes |> Enum.filter(fn g -> g in @opening_brackets end) |> length
-    closings = graphemes |> Enum.filter(fn g -> g in @closing_brackets end) |> length
-
-    (openings - closings) == 0
+    replacement_took_place(str, replaced)
   end
+
+  # all brackets have been replaced in pairs, they're ok
+  defp replacement_took_place("", ""), do: true
+  # there's been no replacement, there's no bracket pair
+  defp replacement_took_place(a, a), do: false
+  # there's been some replacement, call recursively until no bracket pair is left
+  defp replacement_took_place(_, b), do: check_brackets(b)
+
 end
