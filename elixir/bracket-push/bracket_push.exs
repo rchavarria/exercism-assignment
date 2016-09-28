@@ -7,16 +7,13 @@ defmodule BracketPush do
   """
   @spec check_brackets(String.t) :: boolean
   def check_brackets(str) do
-    replaced = String.replace(str, @replacements, "")
-
-    replacement_took_place(str, replaced)
+    should_replace_brackets?(str, Regex.match?(@replacements, str))
   end
 
-  # all brackets have been replaced in pairs, they're ok
-  defp replacement_took_place("", ""), do: true
-  # there's been no replacement, there's no bracket pair
-  defp replacement_took_place(a, a), do: false
-  # there's been some replacement, call recursively until no bracket pair is left
-  defp replacement_took_place(_, b), do: check_brackets(b)
+  defp should_replace_brackets?("", _), do: true
+  defp should_replace_brackets?(_, false), do: false
+  defp should_replace_brackets?(str, true) do
+    check_brackets(String.replace(str, @replacements, ""))
+  end
 
 end
