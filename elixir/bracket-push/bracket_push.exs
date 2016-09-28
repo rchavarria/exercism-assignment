@@ -1,15 +1,13 @@
 defmodule BracketPush do
 
+  @replacements ~r{[a-z\s]|\{\}|\[\]|\(\)}
+
   @doc """
   Checks that all the brackets and braces in the string are matched correctly, and nested correctly
   """
   @spec check_brackets(String.t) :: boolean
   def check_brackets(str) do
-    replaced = str
-               |> String.replace(~r{[a-z\s]}, "")
-               |> String.replace("{}", "")
-               |> String.replace("[]", "")
-               |> String.replace("()", "")
+    replaced = String.replace(str, @replacements, "")
 
     replacement_took_place(str, replaced)
   end
