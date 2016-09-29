@@ -1,4 +1,7 @@
 defmodule Phone do
+
+  @invalid_numbers "0000000000"
+
   @doc """
   Remove formatting from a phone number.
 
@@ -18,7 +21,28 @@ defmodule Phone do
   """
   @spec number(String.t) :: String.t
   def number(raw) do
+    raw |> only_valid_digits
+        |> validate_length
+        |> Enum.join
   end
+
+  defp only_valid_digits(raw) do
+    raw |> validate_digits(Regex.match?(~r{[a-z]}, raw))
+        |> String.replace(~r{[^0-9]}, "")
+        |> String.graphemes
+  end
+
+  defp validate_digits(_, true), do: @invalid_numbers
+  defp validate_digits(raw, false), do: raw
+
+  defp validate_length([ "1" | number ]) when length(number) == 10 do
+    number
+  end
+  defp validate_length([ _ | number ]) when length(number) == 10 do
+    @invalid_numbers |> String.graphemes
+  end
+  defp validate_length(n) when length(n) == 10, do: n
+  defp validate_length(_), do: @invalid_numbers |> String.graphemes
 
   @doc """
   Extract the area code from a phone number
@@ -39,6 +63,7 @@ defmodule Phone do
   """
   @spec area_code(String.t) :: String.t
   def area_code(raw) do
+    raw |> number |> String.slice(0..2)
   end
 
   @doc """
@@ -60,5 +85,14 @@ defmodule Phone do
   """
   @spec pretty(String.t) :: String.t
   def pretty(raw) do
+    area_code = raw |> area_code
+    exchange = raw |> exchange
+    line_number = raw |> line_number
+
+    "(#{area_code}) #{exchange}-#{line_number}"
   end
+
+  defp exchange(raw), do: raw |> number |> String.slice(3..5)
+  defp line_number(raw), do: raw |> number |> String.slice(6..9)
+
 end
