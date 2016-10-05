@@ -13,14 +13,9 @@ defmodule Prime do
     primes_count_down(prime + 1, is_prime?(prime + 1), count - 1)
   end
 
-  defp is_prime?(candidate) do
-    is_divisible?(candidate - 1, candidate)
+  defp is_prime?(n) do
+    max = round(:math.sqrt(n))
+    2..max |> Enum.all?(fn x -> rem(n, x) != 0 end)
   end
-
-  defp is_divisible?(1, _), do: true
-  defp is_divisible?(factor, candidate) when rem(candidate, factor) != 0 do
-    is_divisible?(factor - 1, candidate)
-  end
-  defp is_divisible?(_, _), do: false
 
 end
