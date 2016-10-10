@@ -18,15 +18,20 @@ defmodule Roman do
 
   @spec numerals(pos_integer) :: String.t
   def numerals(number) do
-    append_symbol(number, Enum.at(@symbols, 0), 0, "")
+    append_symbol(number, hd(@symbols), "")
   end
 
-  defp append_symbol(0, _, _, roman), do: roman
-  defp append_symbol(n, { roman_symbol, n_symbol }, index, roman) when n >= n_symbol do
-    append_symbol(n - n_symbol, Enum.at(@symbols, index), index, roman <> roman_symbol)
+  defp append_symbol(0, _, roman), do: roman
+  defp append_symbol(n, { roman_symbol, n_symbol }, roman) when n >= n_symbol do
+    append_symbol(n - n_symbol, { roman_symbol, n_symbol }, roman <> roman_symbol)
   end
-  defp append_symbol(n, _, index, roman) do
-    append_symbol(n, Enum.at(@symbols, index + 1), index + 1, roman)
+  defp append_symbol(n, symbol, roman) do
+    next_symbol = find_next_symbol(symbol)
+    append_symbol(n, next_symbol, roman)
+  end
+
+  defp find_next_symbol({ _, current_n_symbol }) do
+    Enum.find(@symbols, fn { _, n_symbol } -> n_symbol < current_n_symbol end)
   end
 
 end
