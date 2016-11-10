@@ -1,11 +1,11 @@
 defmodule Triangle do
 
   def kind(a, b, c) do
-    [a, b, c]
-    |> Enum.sort
-    |> must_be_greater_than_zero
-    |> do_not_violate_inequality
-    |> is_kind
+    sides = Enum.sort [a, b, c]
+    with { :ok, sides } <- must_be_greater_than_zero(sides),
+         { :ok, sides } <- do_not_violate_inequality(sides) do
+      is_kind(sides)
+    end
   end
 
   defp must_be_greater_than_zero(sides) do
@@ -16,8 +16,7 @@ defmodule Triangle do
     end
   end
 
-  defp do_not_violate_inequality({ :error, _ } = error), do: error
-  defp do_not_violate_inequality({ :ok, sides }) do
+  defp do_not_violate_inequality(sides) do
     [x, y, z] = sides
 
     valid_sides = (z < x + y)
@@ -27,11 +26,10 @@ defmodule Triangle do
     end
   end
 
-  defp is_kind({ :error, _ } = error), do: error
-  defp is_kind({ :ok, [ a, a, a ] }), do: ok(:equilateral)
-  defp is_kind({ :ok, [ a, a, _ ] }), do: ok(:isosceles)
-  defp is_kind({ :ok, [ _, a, a ] }), do: ok(:isosceles)
-  defp is_kind({ :ok, _ }), do: ok(:scalene)
+  defp is_kind([ a, a, a ]), do: ok(:equilateral)
+  defp is_kind([ a, a, _ ]), do: ok(:isosceles)
+  defp is_kind([ _, a, a ]), do: ok(:isosceles)
+  defp is_kind(_), do: ok(:scalene)
 
   defp ok(payload), do: { :ok, payload }
   defp error(message), do: { :error, message }
