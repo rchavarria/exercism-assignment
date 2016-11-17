@@ -8,6 +8,7 @@ ExUnit.configure exclude: :pending, trace: true
 defmodule BeerSongTest do
   use ExUnit.Case
 
+  # @tag :pending
   test "getting just the 100th verse" do
     assert BeerSong.verse(100) == """
     99 bottles of beer on the wall, 99 bottles of beer.
@@ -15,7 +16,7 @@ defmodule BeerSongTest do
     """
   end
 
-  @tag :pending
+  # @tag :pending
   test "getting just the 99th verse" do
     assert BeerSong.verse(99) == """
     98 bottles of beer on the wall, 98 bottles of beer.
@@ -23,7 +24,7 @@ defmodule BeerSongTest do
     """
   end
 
-  @tag :pending
+  # @tag :pending
   test "getting just the 2nd verse" do
     assert BeerSong.verse(2) == """
     1 bottle of beer on the wall, 1 bottle of beer.
@@ -31,7 +32,7 @@ defmodule BeerSongTest do
     """
   end
 
-  @tag :pending
+  # @tag :pending
   test "getting just the 1st verse" do
     assert BeerSong.verse(1) == """
     No more bottles of beer on the wall, no more bottles of beer.
