@@ -1,34 +1,30 @@
 defmodule BeerSong do
+  @of_beer "of beer"
+  @on_the_wall "of beer on the wall"
+
   @doc """
   Get a single verse of the beer song
   """
   @spec verse(integer) :: String.t
-  def verse(number) do
-    current_bottles = number - 1
-
+  def verse(n) do
     """
-    #{number_of_bottles(current_bottles)} bottle#{plural(current_bottles)} of beer on the wall, #{current_bottles |> number_of_bottles |> String.downcase} bottle#{plural(current_bottles)} of beer.
-    #{pass_it_or_buy_it(current_bottles)}, #{remaining_bottles(current_bottles)} of beer on the wall.
+    #{n - 1 |> bottles} #{@on_the_wall}, #{n - 1 |> bottles |> String.downcase} #{@of_beer}.
+    #{pass_it_or_buy_it(n - 1)}, #{n - 2 |> bottles |> String.downcase} #{@on_the_wall}.
     """
   end
 
-  defp number_of_bottles(n) when n > 0, do: Integer.to_string(n)
-  defp number_of_bottles(_), do: "No more"
+  defp bottles(n) when n < 0, do: "99 bottles"
+  defp bottles(0), do: "No more bottles"
+  defp bottles(n), do: "#{n} bottle#{plural(n)}"
 
-  # defp plural(n) when n > 1, do: "s"
   defp plural(1), do: ""
   defp plural(_), do: "s"
 
   defp pass_it_or_buy_it(0), do: "Go to the store and buy some more"
   defp pass_it_or_buy_it(n), do: "Take #{take_n_down(n)} down and pass it around"
 
-  defp take_n_down(n) when n > 1, do: "one"
-  defp take_n_down(_), do: "it"
-
-  defp remaining_bottles(n) when n > 2, do: "#{n - 1} bottles"
-  defp remaining_bottles(2), do: "1 bottle"
-  defp remaining_bottles(1), do: "no more bottles"
-  defp remaining_bottles(0), do: "99 bottles"
+  defp take_n_down(1), do: "it"
+  defp take_n_down(_), do: "one"
 
   @doc """
   Get the entire beer song for a given range of numbers of bottles.
