@@ -1,19 +1,24 @@
 defmodule Isogram do
+  @invalid_graphemes ~r{\W}u
+
   @doc """
   Determines if a word or sentence is an isogram
   """
   @spec isogram?(String.t) :: boolean
   def isogram?(sentence) do
-    original_count = sentence |> sanitize |> Enum.count
-    uniq_count = sentence |> sanitize |> Enum.uniq |> Enum.count
-
-    original_count == uniq_count
+    sentence
+    |> valid_graphemes
+    |> are_isogram?
   end
 
-  defp sanitize(sentence) do
+  defp valid_graphemes(sentence) do
     sentence
-    |> String.replace(~r{[ -]}, "")
+    |> String.replace(@invalid_graphemes, "")
     |> String.graphemes
+  end
+
+  defp are_isogram?(graphemes) do
+    length(graphemes) == length(Enum.uniq(graphemes))
   end
 
 end
