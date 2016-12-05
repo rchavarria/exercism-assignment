@@ -1,6 +1,6 @@
 defmodule Pangram do
-  @invalid_graphemes ~r/[\W_0-9]/
-  @minimum_alphabet_length 26
+  @invalid_graphemes ~r/[^a-z]/
+  @alphabet_length 26
 
   def pangram?(sentence) do
     sentence
@@ -11,12 +11,13 @@ defmodule Pangram do
 
   defp valid_graphemes(sentence) do
     sentence
+    |> String.downcase
     |> String.replace(@invalid_graphemes, "")
     |> String.graphemes
   end
 
   defp match_alphabet_length(graphemes) do
-    graphemes |> Enum.count >= @minimum_alphabet_length
+    graphemes |> Enum.count == @alphabet_length
   end
 
 end
