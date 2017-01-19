@@ -10,7 +10,8 @@ defmodule School do
   end
 
   def sort(db) do
-    Enum.map(db, fn { key, _ } -> { key, grade(db, key) } end)
+    db |> Enum.map(fn { key, _ } -> { key, grade(db, key) } end)
+       |> Enum.sort
   end
 
 end
