@@ -9,12 +9,13 @@ defmodule Garden do
   @kids [ :alice, :bob, :charlie, :david, :eve, :fred, :ginny, :harriet, :ileana, :joseph, :kincaid, :larry ]
 
   @spec info(String.t(), list) :: map
-  def info(info_string, student_names \\ nil) do
+  def info(info_string, student_names \\ @kids) do
+    student_names = Enum.sort(student_names)
     plants_by_kid = split_into_kids(info_string)
 
-    plants_and_kids = Enum.zip(@kids, plants_by_kid) |> Enum.into(%{})
+    plants_and_kids = Enum.zip(student_names, plants_by_kid) |> Enum.into(%{})
 
-    @kids |> Enum.reduce(plants_and_kids, fn kid, acc ->
+    student_names |> Enum.reduce(plants_and_kids, fn kid, acc ->
       Map.update(acc, kid, {}, &(&1))
     end)
   end
