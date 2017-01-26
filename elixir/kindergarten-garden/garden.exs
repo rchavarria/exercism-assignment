@@ -6,7 +6,7 @@ defmodule Garden do
     "V" => :violets
   }
 
-  @kids [ :alice, :bob ]
+  @kids [ :alice, :bob, :charlie, :david, :eve, :fred, :ginny, :harriet, :ileana, :joseph, :kincaid, :larry ]
 
   @spec info(String.t(), list) :: map
   def info(info_string, student_names \\ nil) do
