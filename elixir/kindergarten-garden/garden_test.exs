@@ -9,25 +9,28 @@ defmodule GardenTest do
   use ExUnit.Case
 
   test "gets the garden for Alice with just her plants" do
+    #Garden.split_into_kids("RC\nGG")
+    #Garden.split_into_kids("VVCG\nVVRC")
+    #Garden.split_into_kids("11223344\nAABBCCDD")
+
     garden_info = Garden.info("RC\nGG")
     assert garden_info.alice == {:radishes, :clover, :grass, :grass}
   end
 
-  # @tag :pending
+  #@tag :pending
   test "gets another garden for Alice with just her plants" do
     garden_info = Garden.info("VC\nRC")
     assert garden_info.alice == {:violets, :clover, :radishes, :clover}
   end
 
-  # @tag :pending
+  #@tag :pending
   test "returns an empty tuple if the child has no plants" do
     garden_info = Garden.info("VC\nRC")
     assert garden_info.bob == {}
   end
 
-  # @tag :pending
+  #@tag :pending
   test "gets the garden for Bob" do
-    rows_by_kid = Garden.split_into_kids("VVCG\nVVRC")
     garden_info = Garden.info("VVCG\nVVRC")
     assert garden_info.bob == {:clover, :grass, :radishes, :clover}
   end
