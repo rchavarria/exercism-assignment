@@ -10,57 +10,33 @@ defmodule Garden do
 
   @spec info(String.t(), list) :: map
   def info(info_string, student_names \\ nil) do
-    rows = String.split(info_string, "\n")
-    result = rows
-            |> Enum.map(fn row -> String.graphemes(row) end)
-            |> List.flatten
-            |> decode_plants
-            |> List.to_tuple
+    plants_by_kid = split_into_kids(info_string)
 
-    # IO.puts "Result #{inspect(result)}"
+    plants_and_kids = Enum.zip(@kids, plants_by_kid) |> Enum.into(%{})
 
-    rows_by_kid = split_into_kids(info_string)
-
-    tuppled = Enum.zip(@kids, rows_by_kid)
-    IO.puts "tuppled: #{inspect(tuppled)}"
-
-    together = tuppled |> Enum.into %{}
-
-    result = @kids |> Enum.reduce(together, fn kid, acc ->
+    @kids |> Enum.reduce(plants_and_kids, fn kid, acc ->
       Map.update(acc, kid, {}, &(&1))
     end)
-
-    result
   end
 
-  defp decode_plants(plant_codes) do
-    plant_codes
+  defp split_into_kids(info_string) do
+    info_string
+    |> String.split("\n")
+    |> Enum.map(&chunk_by_2/1)
+    |> List.zip
+    |> Enum.map(&decode_plants/1)
+  end
+
+  defp chunk_by_2(row) do
+    row |> String.graphemes |> Enum.chunk(2)
+  end
+
+  defp decode_plants(plants_for_a_single_kid) do
+    plants_for_a_single_kid
+    |> Tuple.to_list
+    |> List.flatten
     |> Enum.map(fn plant -> @plants[plant] end)
-  end
-
-  def split_into_kids(info_string) do
-    IO.puts "\ninfo_string: #{info_string}"
-
-    rows = String.split(info_string, "\n")
-    rows_by_kid = rows
-                  |> Enum.map(fn row ->
-                    row
-                    |> String.graphemes
-                    |> Enum.chunk(2)
-                  end)
-
-    IO.puts "Rows by kid: #{inspect(rows_by_kid)}"
-
-    zipped_list = rows_by_kid |> List.zip
-    IO.puts "zipped_list: #{inspect(zipped_list)}"
-
-    untuppled = zipped_list |> Enum.map(&Tuple.to_list/1)
-    IO.puts "untuppled: #{inspect(untuppled)}"
-
-    untuppled_flatten = untuppled |> Enum.map(&List.flatten/1) |> Enum.map(&decode_plants/1) |> Enum.map(&List.to_tuple/1)
-    IO.puts "untuppled_flatten: #{inspect(untuppled_flatten)}"
-
-    untuppled_flatten
+    |> List.to_tuple
   end
 
 end
