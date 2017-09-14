@@ -10,33 +10,18 @@ defmodule SecretHandshake do
   ]
 
   def commands(code) do
-    @operations
-    |> decode(code, [])
-    |> remove_empty()
-    |> reverse(code)
+    operations = @operations |> reverse_if(code |> means_it())
+    for { selector, operation } <- operations,
+      code |> should_be_selected_by(selector),
+      do: operation
   end
 
-  defp decode([], _code, decoded_operations), do: decoded_operations
-  defp decode([ {mask, operation} | rest_operations ], code, decoded_operations) do
-    [
-      apply_mask(code &&& mask, operation)
-      | decode(rest_operations, code, decoded_operations)
-    ]
-  end
+  defp should_be_selected_by(code, selector), do: (code &&& selector) > 0
 
-  defp apply_mask(0, _), do: ""
-  defp apply_mask(_, operation), do: operation
+  defp reverse_if(operations, false), do: operations
+  defp reverse_if(operations, _do_reverse), do: operations |> Enum.reverse()
 
-  defp remove_empty(operations) do
-    operations |> Enum.filter(&(&1 != ""))
-  end
-
-  defp reverse(operations, code) do
-    operations |> might_reverse(code &&& @reverse_operation_code)
-  end
-
-  defp might_reverse(operations, 0), do: operations
-  defp might_reverse(operations, _do_reverse), do: operations |> Enum.reverse()
+  defp means_it(code), do: (code &&& @reverse_operation_code) > 0
 
 end
 
