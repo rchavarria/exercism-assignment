@@ -4,19 +4,11 @@ defmodule Strain do
   end
 
   def discard(list, fun) do
-    filter(list, &(not fun.(&1)))
+    filter(list, &!fun.(&1))
   end
 
-  defp filter([], _fun), do: []
-  defp filter(list = [ h | _ ], func) do
-    _filter(list, func, func.(h))
-  end
-
-  defp _filter([ _head | tail ], fun, false) do
-    filter(tail, fun)
-  end
-  defp _filter([ head | tail ], fun, true) do
-    [ head | filter(tail, fun) ]
+  defp filter(list, func) do
+    for e <- list, func.(e), do: e
   end
 
 end
