@@ -63,24 +63,24 @@ defmodule ProteinTranslationTest do
     assert ProteinTranslation.of_rna(strand) == { :ok, ~w(Methionine Phenylalanine Tryptophan) }
   end
 
-  @tag :pending
+  #@tag :pending
   test "stops translation if stop codon present" do
     strand = "AUGUUUUAA"
     assert ProteinTranslation.of_rna(strand) == { :ok, ~w(Methionine Phenylalanine) }
   end
 
-  @tag :pending
+  #@tag :pending
   test "stops translation of longer strand" do
     strand = "UGGUGUUAUUAAUGGUUU"
     assert ProteinTranslation.of_rna(strand) == { :ok, ~w(Tryptophan Cysteine Tyrosine) }
   end
 
-  @tag :pending
+  #@tag :pending
   test "invalid RNA" do
     assert ProteinTranslation.of_rna("CARROT") == { :error, "invalid RNA" }
   end
 
-  @tag :pending
+  #@tag :pending
   test "invalid codon" do
     assert ProteinTranslation.of_codon("INVALID") == { :error, "invalid codon" }
   end
