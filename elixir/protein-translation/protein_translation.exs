@@ -23,8 +23,8 @@ defmodule ProteinTranslation do
     rna
     |> split_into_codons()
     |> make_proteins()
-    |> take_until_stop()
-    |> verify()
+    |> process_proteins()
+    |> verify_rna()
   end
 
   defp split_into_codons(rna) do
@@ -34,21 +34,25 @@ defmodule ProteinTranslation do
     |> Enum.map(&Enum.join/1)
   end
 
-  defp remove_invalid(proteins) do
-    proteins
-    |> Enum.filter(&(&1 != nil))
-  end
-
   defp make_proteins(codons) do
     codons
     |> Enum.map(&to_protein/1)
-    |> remove_invalid()
-  end
-
-  defp take_until_stop(proteins) do
-    proteins
     |> Enum.take_while(&(&1 != "STOP"))
   end
+
+  defp process_proteins(proteins) do
+    proteins
+    |> Enum.reverse()
+    |> Enum.reduce([], fn protein, processed -> 
+      verify_protein(protein, processed)
+    end)
+  end
+
+  defp verify_protein(nil, _processed_proteins), do: :error
+  defp verify_protein(protein, processed_proteins), do: [ protein | processed_proteins ]
+
+  defp verify_rna(:error), do: { :error, "invalid RNA" }
+  defp verify_rna(rna), do: { :ok, rna }
 
   def of_codon(codon) do
     codon
@@ -60,7 +64,6 @@ defmodule ProteinTranslation do
     @codon_to_protein[codon]
   end
 
-  defp verify([]), do: { :error, "invalid RNA" }
   defp verify(nil), do: { :error, "invalid codon" }
   defp verify(protein), do: { :ok, protein }
 end
