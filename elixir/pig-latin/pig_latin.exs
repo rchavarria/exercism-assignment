@@ -3,6 +3,13 @@ defmodule PigLatin do
   @allowed_starts ~w{a e i o u yt xr}
 
   def translate(phrase) do
+    phrase
+    |> String.split(" ")
+    |> Enum.map(&translate_word/1)
+    |> Enum.join(" ")
+  end
+
+  def translate_word(phrase) do
     prefix = phrase
              |> String.codepoints()
              |> until_valid_start([])
@@ -24,6 +31,9 @@ defmodule PigLatin do
     prefix
     |> Enum.reverse()
     |> Enum.join()
+  end
+  defp continue_until_valid(phrase = [ "q", "u" | tail ], prefix, false) do
+    until_valid_start(tail, [ "u", "q" | prefix ])
   end
   defp continue_until_valid(phrase = [ first | tail ], prefix, false) do
     until_valid_start(tail, [ first | prefix ])
