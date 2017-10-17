@@ -16,20 +16,21 @@ defmodule TwelveDays do
     twelfth
   )
 
-
-  @gifts %{
-    2 => "two Turtle Doves",
-      3 => "three French Hens",
-      4 => "four Calling Birds",
-      5 => "five Gold Rings",
-      6 => "six Geese-a-Laying",
-      7 => "seven Swans-a-Swimming",
-      8 => "eight Maids-a-Milking",
-      9 => "nine Ladies Dancing",
-      10 => "ten Lords-a-Leaping",
-      11 => "eleven Pipers Piping",
-      12 => "twelve Drummers Drumming",
-  }
+  @gifts [
+    "no gift for zero",
+    "no gift for one",
+    "two Turtle Doves",
+    "three French Hens",
+    "four Calling Birds",
+    "five Gold Rings",
+    "six Geese-a-Laying",
+    "seven Swans-a-Swimming",
+    "eight Maids-a-Milking",
+    "nine Ladies Dancing",
+    "ten Lords-a-Leaping",
+    "eleven Pipers Piping",
+    "twelve Drummers Drumming",
+  ]
 
   def verse(number) do
     [
@@ -44,7 +45,7 @@ defmodule TwelveDays do
   defp additional_gifts(n), do: gifts(n) |> Enum.join(", ")
 
   defp gifts(1), do: []
-  defp gifts(n), do: [ @gifts[n] | gifts(n - 1) ]
+  defp gifts(n), do: [ @gifts |> Enum.at(n) | gifts(n - 1) ]
 
   defp gifts_connection(1), do: ""
   defp gifts_connection(_), do: ", and "
