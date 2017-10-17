@@ -1,11 +1,16 @@
 defmodule StringSeries do
-  @doc """
-  Given a string `s` and a positive integer `size`, return all substrings
-  of that size. If `size` is greater than the length of `s`, or less than 1,
-  return an empty list.
-  """
-  @spec slices(s :: String.t(), size :: integer) :: list(String.t())
-  def slices(_s, _size) do
+
+  def slices(str, size) do
+    times = String.length(str) - size 
+    do_slices(str, times, size)
   end
+
+  defp do_slices(_str, _times, size) when size <= 0, do: []
+  defp do_slices(_str, times, _size) when times < 0, do: []
+  defp do_slices(str, times, size) do
+    0..times
+    |> Enum.map(fn i -> String.slice(str, i, size) end)
+  end
+
 end
 
