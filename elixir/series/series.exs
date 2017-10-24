@@ -1,15 +1,11 @@
 defmodule StringSeries do
 
+  def slices(_str, size) when size < 1, do: []
   def slices(str, size) do
-    times = String.length(str) - size 
-    do_slices(str, times, size)
-  end
-
-  defp do_slices(_str, _times, size) when size <= 0, do: []
-  defp do_slices(_str, times, _size) when times < 0, do: []
-  defp do_slices(str, times, size) do
-    0..times
-    |> Enum.map(fn i -> String.slice(str, i, size) end)
+    str
+    |> String.graphemes
+    |> Enum.chunk(size, 1)
+    |> Enum.map(&Enum.join/1)
   end
 
 end
