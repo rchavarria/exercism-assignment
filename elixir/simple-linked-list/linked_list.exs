@@ -1,52 +1,30 @@
 defmodule LinkedList do
   @opaque t :: tuple()
 
-  @doc """
-  Construct a new LinkedList
-  """
-  @spec new() :: t
   def new() do
-    # Your implementation here...
+    {}
   end
 
-  @doc """
-  Push an item onto a LinkedList
-  """
-  @spec push(t, any()) :: t
   def push(list, elem) do
-    # Your implementation here...
+    { elem, list }
   end
 
-  @doc """
-  Calculate the length of a LinkedList
-  """
-  @spec length(t) :: non_neg_integer()
-  def length(list) do
-    # Your implementation here...
+  def length({}), do: 0
+  def length({ elem, tail }) do
+    1 + LinkedList.length(tail)
   end
 
-  @doc """
-  Determine if a LinkedList is empty
-  """
-  @spec empty?(t) :: boolean()
-  def empty?(list) do
-    # Your implementation here...
+  def empty?({}), do: true
+  def empty?(_list), do: false
+
+  def peek({}), do: { :error, :empty_list }
+  def peek({ elem, next }) do
+    { :ok, elem }
   end
 
-  @doc """
-  Get the value of a head of the LinkedList
-  """
-  @spec peek(t) :: {:ok, any()} | {:error, :empty_list}
-  def peek(list) do
-    # Your implementation here...
-  end
-
-  @doc """
-  Get tail of a LinkedList
-  """
-  @spec tail(t) :: {:ok, t} | {:error, :empty_list}
-  def tail(list) do
-    # Your implementation here...
+  def tail({}), do: { :error, :empty_list }
+  def tail({ _elem, next }) do
+    { :ok, next }
   end
 
   @doc """

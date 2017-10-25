@@ -13,19 +13,19 @@ defmodule LinkedListTest do
     assert LinkedList.length(list) == 0
   end
 
-  @tag :pending
+  #@tag :pending
   test "empty?/1 of new list" do
     list = LinkedList.new()
     assert LinkedList.empty?(list)
   end
 
-  @tag :pending
+  #@tag :pending
   test "length/1 of list of 1 datum" do
     list = LinkedList.new() |> LinkedList.push(10)
     assert LinkedList.length(list) == 1
   end
 
-  @tag :pending
+  #@tag :pending
   test "empty?/1 of list of 1 datum" do
     list = LinkedList.new() |> LinkedList.push(20)
     refute LinkedList.empty?(list)
@@ -37,26 +37,26 @@ defmodule LinkedListTest do
     assert LinkedList.peek(list) == {:ok, 20}
   end
 
-  @tag :pending
+  #@tag :pending
   test "peek/1 of list of empty list" do
     list = LinkedList.new()
     assert LinkedList.peek(list) == {:error, :empty_list}
   end
 
-  @tag :pending
+  #@tag :pending
   test "tail/1 of empty list" do
     list = LinkedList.new()
     assert {:error, :empty_list} = LinkedList.tail(list)
   end
 
-  @tag :pending
+  #@tag :pending
   test "tail/1 of list of 1 datum" do
     list = LinkedList.new() |> LinkedList.push(:hello)
     assert {:ok, tail} = LinkedList.tail(list)
     assert LinkedList.peek(tail) == {:error, :empty_list}
   end
 
-  @tag :pending
+  #@tag :pending
   test "pushed items are stacked" do
     list =
       LinkedList.new()
@@ -69,14 +69,14 @@ defmodule LinkedListTest do
     assert LinkedList.peek(list) == {:error, :empty_list}
   end
 
-  @tag :pending
+  #@tag :pending
   test "push 10 times" do
     list = Enum.reduce(1..10, LinkedList.new(), &LinkedList.push(&2, &1))
     assert LinkedList.peek(list) == {:ok, 10}
     assert LinkedList.length(list) == 10
   end
 
-  @tag :pending
+  #@tag :pending
   test "pop/1 of list of 1 datum" do
     list = LinkedList.new() |> LinkedList.push(:a)
     assert {:ok, :a, tail} = LinkedList.pop(list)
