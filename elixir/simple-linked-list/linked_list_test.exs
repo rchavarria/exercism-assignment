@@ -31,7 +31,7 @@ defmodule LinkedListTest do
     refute LinkedList.empty?(list)
   end
 
-  @tag :pending
+  #@tag :pending
   test "peek/1 of list of 1 datum" do
     list = LinkedList.new() |> LinkedList.push(20)
     assert LinkedList.peek(list) == {:ok, 20}
@@ -83,7 +83,7 @@ defmodule LinkedListTest do
     assert LinkedList.length(tail) == 0
   end
 
-  @tag :pending
+  #@tag :pending
   test "popping frenzy" do
     list = Enum.reduce(11..20, LinkedList.new(), &LinkedList.push(&2, &1))
     assert LinkedList.length(list) == 10
@@ -96,13 +96,13 @@ defmodule LinkedListTest do
     assert LinkedList.length(list) == 5
   end
 
-  @tag :pending
+  #@tag :pending
   test "from_list/1 of empty list" do
     list = LinkedList.from_list([])
     assert LinkedList.length(list) == 0
   end
 
-  @tag :pending
+  #@tag :pending
   test "from_list/1 of 2 element list" do
     list = LinkedList.from_list([:a, :b])
     assert LinkedList.length(list) == 2
@@ -111,38 +111,38 @@ defmodule LinkedListTest do
     assert {:error, :empty_list} = LinkedList.pop(list)
   end
 
-  @tag :pending
+  #@tag :pending
   test "to_list/1 of empty list" do
     list = LinkedList.new()
     assert LinkedList.to_list(list) == []
   end
 
-  @tag :pending
+  #@tag :pending
   test "to_list/1 of list of 1 datum" do
     list = LinkedList.from_list([:mon])
     assert LinkedList.to_list(list) == [:mon]
   end
 
-  @tag :pending
+  #@tag :pending
   test "to_list/1 of list of 2 datum" do
     list = LinkedList.from_list([:mon, :tues])
     assert LinkedList.to_list(list) == [:mon, :tues]
   end
 
-  @tag :pending
+  #@tag :pending
   test "reverse/1 of list of 2 datum" do
     list = LinkedList.from_list([1, 2, 3]) |> LinkedList.reverse()
     assert LinkedList.to_list(list) == [3, 2, 1]
   end
 
-  @tag :pending
+  #@tag :pending
   test "reverse/1 of list of 200 datum" do
     list = Enum.to_list(1..200)
     linked_list = LinkedList.from_list(list) |> LinkedList.reverse()
     assert LinkedList.to_list(linked_list) == Enum.reverse(list)
   end
 
-  @tag :pending
+  #@tag :pending
   test "reverse/1 round trip" do
     list = Enum.to_list(1..200)
     linked_list =

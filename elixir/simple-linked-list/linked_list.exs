@@ -10,7 +10,7 @@ defmodule LinkedList do
   end
 
   def length({}), do: 0
-  def length({ elem, tail }) do
+  def length({ _elem, tail }) do
     1 + LinkedList.length(tail)
   end
 
@@ -18,7 +18,7 @@ defmodule LinkedList do
   def empty?(_list), do: false
 
   def peek({}), do: { :error, :empty_list }
-  def peek({ elem, next }) do
+  def peek({ elem, _tail }) do
     { :ok, elem }
   end
 
@@ -27,35 +27,27 @@ defmodule LinkedList do
     { :ok, next }
   end
 
-  @doc """
-  Remove the head from a LinkedList
-  """
-  @spec pop(t) :: {:ok, any(), t} | {:error, :empty_list}
-  def pop(list) do
-    # Your implementation here...
+  def pop({}), do: { :error, :empty_list }
+  def pop({ element, tail }) do
+    { :ok, element, tail }
   end
 
-  @doc """
-  Construct a LinkedList from a stdlib List
-  """
-  @spec from_list(list()) :: t
-  def from_list(list) do
-    # Your implementation here...
+  def from_list([]), do: {}
+  def from_list([ head | tail ]) do
+    { head, from_list(tail) }
   end
 
-  @doc """
-  Construct a stdlib List LinkedList from a LinkedList
-  """
-  @spec to_list(t) :: list()
-  def to_list(list) do
-    # Your implementation here...
+  def to_list({}), do: []
+  def to_list({ elem, tail }) do
+    [ elem | to_list(tail) ]
   end
 
-  @doc """
-  Reverse a LinkedList
-  """
-  @spec reverse(t) :: t
   def reverse(list) do
-    # Your implementation here...
+    do_reverse(list, {})
+  end
+
+  defp do_reverse({}, reversed), do: reversed
+  defp do_reverse({ elem, tail }, reversed) do
+    do_reverse(tail, reversed |> LinkedList.push(elem))
   end
 end
