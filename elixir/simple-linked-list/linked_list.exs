@@ -1,56 +1,57 @@
 defmodule LinkedList do
   @opaque t :: tuple()
 
-  @empty_list {}
+  defstruct [ elem: nil, tail: nil ]
+  
   @empty_list_error { :error, :empty_list }
 
   def new() do
-    @empty_list
+    %LinkedList{}
   end
 
   def push(list, elem) do
-    { elem, list }
+    %LinkedList{ elem: elem, tail: list }
   end
 
-  def length(@empty_list), do: 0
-  def length({ _elem, tail }) do
-    1 + LinkedList.length(tail)
+  def length(%LinkedList{ elem: nil }), do: 0
+  def length(list) do
+    1 + LinkedList.length(list.tail)
   end
 
-  def empty?(@empty_list), do: true
+  def empty?(%LinkedList{ elem: nil }), do: true
   def empty?(_list), do: false
 
-  def peek(@empty_list), do: @empty_list_error
-  def peek({ elem, _tail }) do
-    { :ok, elem }
+  def peek(%LinkedList{ elem: nil }), do: @empty_list_error
+  def peek(list) do
+    { :ok, list.elem }
   end
 
-  def tail(@empty_list), do: @empty_list_error
-  def tail({ _elem, next }) do
-    { :ok, next }
+  def tail(%LinkedList{ elem: nil }), do: @empty_list_error
+  def tail(list) do
+    { :ok, list.tail }
   end
 
-  def pop(@empty_list), do: @empty_list_error
-  def pop({ element, tail }) do
-    { :ok, element, tail }
+  def pop(%LinkedList{ elem: nil }), do: @empty_list_error
+  def pop(list) do
+    { :ok, list.elem, list.tail }
   end
 
-  def from_list([]), do: @empty_list
+  def from_list([]), do: %LinkedList{}
   def from_list([ head | tail ]) do
-    { head, from_list(tail) }
+    %LinkedList{ elem: head, tail: from_list(tail) }
   end
 
-  def to_list(@empty_list), do: []
-  def to_list({ elem, tail }) do
-    [ elem | to_list(tail) ]
+  def to_list(%LinkedList{ elem: nil }), do: []
+  def to_list(list) do
+    [ list.elem | to_list(list.tail) ]
   end
 
   def reverse(list) do
-    do_reverse(list, @empty_list)
+    do_reverse(list, %LinkedList{})
   end
 
-  defp do_reverse(@empty_list, reversed), do: reversed
-  defp do_reverse({ elem, tail }, reversed) do
-    do_reverse(tail, reversed |> LinkedList.push(elem))
+  defp do_reverse(%LinkedList{ elem: nil }, reversed), do: reversed
+  defp do_reverse(list, reversed) do
+    do_reverse(list.tail, reversed |> LinkedList.push(list.elem))
   end
 end
