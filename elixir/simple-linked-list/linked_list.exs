@@ -1,6 +1,8 @@
 defmodule LinkedList do
   @opaque t :: tuple()
 
+  @empty_list_error { :error, :empty_list }
+
   def new() do
     {}
   end
@@ -17,17 +19,17 @@ defmodule LinkedList do
   def empty?({}), do: true
   def empty?(_list), do: false
 
-  def peek({}), do: { :error, :empty_list }
+  def peek({}), do: @empty_list_error
   def peek({ elem, _tail }) do
     { :ok, elem }
   end
 
-  def tail({}), do: { :error, :empty_list }
+  def tail({}), do: @empty_list_error
   def tail({ _elem, next }) do
     { :ok, next }
   end
 
-  def pop({}), do: { :error, :empty_list }
+  def pop({}), do: @empty_list_error
   def pop({ element, tail }) do
     { :ok, element, tail }
   end
