@@ -24,14 +24,13 @@ defmodule Matrix do
   """
   @spec rows(matrix :: %Matrix{}) :: list(list(integer))
   def rows(matrix) do
-    lines = String.split(matrix.matrix, "\n")
-    rows = lines
-           |> Enum.map(fn line ->
-             line
-             |> String.split(" ")
-             |> Enum.map(&String.to_integer/1)
-           end)
-    rows
+    matrix.matrix
+    |> String.split("\n")
+    |> Enum.map(fn line ->
+      line
+      |> String.split(" ")
+      |> Enum.map(&String.to_integer/1)
+    end)
   end
 
   @doc """
@@ -44,9 +43,38 @@ defmodule Matrix do
 
   @doc """
   Given a `matrix`, return its columns as a list of lists of integers.
+
+  An algorithm can be found here, but it's cryptic:
+  https://gist.github.com/pmarreck/6e054c162844e9d83d89
+
+  Here is a post with better info:
+  http://langintro.com/elixir/article2/
   """
   @spec columns(matrix :: %Matrix{}) :: list(list(integer))
   def columns(matrix) do
+    matrix |> rows |> transpose([])
+  end
+
+  def transpose([], transposed) do
+    reverse_rows(transposed, [])
+  end
+
+  def transpose([ first_row | other_rows ], transposed) do
+    new_transposed = make_column(first_row, transposed)
+    transpose(other_rows, new_transposed)
+  end
+
+  def make_column([], resulting_col), do: resulting_col
+  def make_column([ first_item | other_items ], []) do
+    [ [first_item] | make_column(other_items, []) ]
+  end
+  def make_column([ first_item | other_items ], [ first_row | other_rows ]) do
+    [ [first_item | first_row] | make_column(other_items, other_rows) ]
+  end
+
+  def reverse_rows([], result), do: Enum.reverse(result)
+  def reverse_rows([first | others], result) do
+    reverse_rows(others, [Enum.reverse(first) | result])
   end
 
   @doc """
@@ -54,6 +82,7 @@ defmodule Matrix do
   """
   @spec column(matrix :: %Matrix{}, index :: integer) :: list(integer)
   def column(matrix, index) do
+    matrix |> columns |> Enum.at(index)
   end
 end
 
