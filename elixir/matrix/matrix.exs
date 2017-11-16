@@ -54,13 +54,10 @@ defmodule Matrix do
   """
   @spec columns(matrix :: %Matrix{}) :: list(list(integer))
   def columns(matrix) do
-    rows = matrix |> rows()
-    number_of_columns = rows |> hd() |> length()
-    for i <- 0..number_of_columns - 1, do: extract_column(rows, i)
-  end
-
-  defp extract_column(rows, index) do
-    rows |> Enum.map(&Enum.at(&1, index))
+    matrix
+    |> rows()
+    |> List.zip
+    |> Enum.map(&Tuple.to_list/1)
   end
 
   @doc """
