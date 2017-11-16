@@ -26,11 +26,13 @@ defmodule Matrix do
   def rows(matrix) do
     matrix.matrix
     |> String.split("\n")
-    |> Enum.map(fn line ->
-      line
-      |> String.split(" ")
-      |> Enum.map(&String.to_integer/1)
-    end)
+    |> Enum.map(&to_integer_list/1)
+  end
+
+  defp to_integer_list(line) do
+    line
+    |> String.split()
+    |> Enum.map(&String.to_integer/1)
   end
 
   @doc """
@@ -52,29 +54,13 @@ defmodule Matrix do
   """
   @spec columns(matrix :: %Matrix{}) :: list(list(integer))
   def columns(matrix) do
-    matrix |> rows |> transpose([])
+    rows = matrix |> rows()
+    number_of_columns = rows |> hd() |> length()
+    for i <- 0..number_of_columns - 1, do: extract_column(rows, i)
   end
 
-  def transpose([], transposed) do
-    reverse_rows(transposed, [])
-  end
-
-  def transpose([ first_row | other_rows ], transposed) do
-    new_transposed = make_column(first_row, transposed)
-    transpose(other_rows, new_transposed)
-  end
-
-  def make_column([], resulting_col), do: resulting_col
-  def make_column([ first_item | other_items ], []) do
-    [ [first_item] | make_column(other_items, []) ]
-  end
-  def make_column([ first_item | other_items ], [ first_row | other_rows ]) do
-    [ [first_item | first_row] | make_column(other_items, other_rows) ]
-  end
-
-  def reverse_rows([], result), do: Enum.reverse(result)
-  def reverse_rows([first | others], result) do
-    reverse_rows(others, [Enum.reverse(first) | result])
+  defp extract_column(rows, index) do
+    rows |> Enum.map(&Enum.at(&1, index))
   end
 
   @doc """
