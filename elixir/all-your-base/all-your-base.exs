@@ -36,7 +36,7 @@ defmodule AllYourBase do
   defp from_base_10(0, _base, []), do: [0]
   defp from_base_10(0, _base, digits), do: digits
   defp from_base_10(number, base, digits) do
-    from_base_10(div(number, base), base, [ Integer.mod(number, base) | digits ])
+    from_base_10(div(number, base), base, [ rem(number, base) | digits ])
   end
 
 end
